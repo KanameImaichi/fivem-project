@@ -8,6 +8,8 @@ TEMPLATE_BOOT_IMAGE_TARGET_VOLUME=local-lvm
 BOOT_IMAGE_TARGET_VOLUME=local-lvm
 SNIPPET_TARGET_VOLUME=local
 SNIPPET_TARGET_PATH=/var/lib/vz/snippets
+REPOSITORY_RAW_SOURCE_URL="https://raw.githubusercontent.com/KanameImaichi/fivem-project/main"
+TARGET_BRANCH="main"
 VM_LIST=(
     # ---
     # vmid:       proxmox上でVMを識別するID
@@ -133,8 +135,8 @@ runcmd:
   - su - cloudinit -c "curl -sS https://github.com/KanameImaichi.keys >> ~/.ssh/authorized_keys"
   - su - cloudinit -c "chmod 600 ~/.ssh/authorized_keys"
   # run install scripts
-  - su - cloudinit -c "curl -s ${REPOSITORY_RAW_SOURCE_URL}/scripts/k8s-node-setup.sh > ~/k8s-node-setup.sh"
-  - su - cloudinit -c "sudo bash ./test.bash ${vmname} ${TARGET_BRANCH}"
+  - su - cloudinit -c "curl -s ${REPOSITORY_RAW_SOURCE_URL}/k8s-proxmox/k8s-node-setup.sh > ~/k8s-node-setup.sh"
+  - su - cloudinit -c "sudo bash ./k8s-node-setup.sh ${vmname} ${TARGET_BRANCH}"
   # change default shell to bash
   - chsh -s $(which bash) cloudinit
 EOF
