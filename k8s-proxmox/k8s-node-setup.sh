@@ -257,12 +257,12 @@ useradd -r -s /sbin/nologin -g keepalived_script -M keepalived_script
 echo "keepalived_script ALL=(ALL) NOPASSWD: /usr/bin/killall" >> /etc/sudoers
 
 # Enable VIP services
-systemctl enable keepalived --now
-systemctl enable haproxy --now
+sudo systemctl enable keepalived --now
+sudo systemctl enable haproxy --now
 
 # Reload VIP services
-systemctl reload keepalived
-systemctl reload haproxy
+sudo systemctl reload keepalived
+sudo systemctl reload haproxy
 
 # Pull images first
 kubeadm config images pull
