@@ -281,11 +281,14 @@ sudo mv velero-${VELERO_VERSION}-linux-amd64/velero /usr/local/bin/
 # Ends except first-control-plane
 case $1 in
     cp-1)
+        echo "cp-1"
         ;;
     cp-2|cp-3)
+        echo "cp-23"
         exit 0
         ;;
     *)
+        echo "cp-111111"
         exit 1
         ;;
 esac
