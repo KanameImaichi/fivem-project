@@ -290,6 +290,8 @@ case $1 in
         ;;
 esac
 
+echo "testyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+
 # region : setup for first-control-plane node
 
 # Set kubeadm bootstrap token using openssl
