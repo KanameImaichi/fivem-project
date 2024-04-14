@@ -36,9 +36,9 @@ esac
 
 # Set global variables
 TARGET_BRANCH=$2
-KUBE_API_SERVER_VIP=172.16.3.100
-VIP_INTERFACE=ens19
-NODE_IPS=( 192.168.11.21 192.168.11.22 192.168.11.23 )
+KUBE_API_SERVER_VIP=192.168.11.11
+VIP_INTERFACE=ens18
+NODE_IPS=( 192.168.11.11 192.168.11.12 192.168.11.13 )
 EXTERNAL_KUBE_API_SERVER="$(tr -dc '[:lower:]' </dev/urandom | head -c 1)$(tr -dc '[:lower:]0-9' </dev/urandom | head -c 7)-api.unchama.com"
 
 # set per-node variables
