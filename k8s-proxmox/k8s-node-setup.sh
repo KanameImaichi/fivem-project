@@ -430,14 +430,14 @@ EOF
 sudo apt-get install -y ansible git sshpass
 
 # clone repo
-git clone -b "${TARGET_BRANCH}" https://github.com/KanameImaichi/fivem-project.git "$HOME"/kube-cluster-on-proxmox
+git clone -b "${TARGET_BRANCH}" https://github.com/KanameImaichi/fivem-project.git "$HOME"/fivem-project
 
 # export ansible.cfg target
-export ANSIBLE_CONFIG="$HOME"/kube-cluster-on-proxmox/ansible/ansible.cfg
+export ANSIBLE_CONFIG="$HOME"/fivem-project/ansible/ansible.cfg
 
 # run ansible-playbook
-ansible-galaxy role install -r "$HOME"/kube-cluster-on-proxmox/ansible/roles/requirements.yaml
-ansible-galaxy collection install -r "$HOME"/kube-cluster-on-proxmox/ansible/roles/requirements.yaml
-ansible-playbook -i "$HOME"/kube-cluster-on-proxmox/ansible/hosts/k8s-servers/inventory "$HOME"/kube-cluster-on-proxmox/ansible/site.yaml
+ansible-galaxy role install -r "$HOME"/fivem-project/ansible/roles/requirements.yaml
+ansible-galaxy collection install -r "$HOME"/fivem-project/ansible/roles/requirements.yaml
+ansible-playbook -i "$HOME"/fivem-project/ansible/hosts/k8s-servers/inventory "$HOME"/fivem-project/ansible/site.yaml
 
 # endregion
