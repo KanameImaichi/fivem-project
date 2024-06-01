@@ -159,7 +159,7 @@ config:
     address:
     - '8.8.8.8'
     search:
-    - 'local'
+    - 'pve'
 EOF
 # ----- #
         # END irregular indent because heredoc
