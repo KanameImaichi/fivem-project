@@ -154,7 +154,7 @@ config:
     subnets:
     - type: static
       address: '${vmsrvip}'
-      gateway: '192.168.0.18'
+      gateway: '192.168.0.1'
   - type: nameserver
     address:
     - '8.8.8.8'
