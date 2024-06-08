@@ -355,8 +355,8 @@ helm install cilium cilium/cilium \
     --set k8sServicePort=8443
 
 # Install ArgoCD Helm chart
-helm repo add argo https://argoproj.github.io/argo-helm
 kubectl create namespace argocd
+helm repo add argo https://argoproj.github.io/argo-helm
 helm install -n argocd argocd argo/argo-cd
 
 
