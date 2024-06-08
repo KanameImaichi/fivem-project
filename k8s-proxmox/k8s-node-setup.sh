@@ -356,14 +356,7 @@ helm install cilium cilium/cilium \
 
 # Install ArgoCD Helm chart
 helm repo add argo https://argoproj.github.io/argo-helm
-helm install argocd argo/argo-cd \
-    --version 5.36.10 \
-    --create-namespace \
-    --namespace argocd \
-    --values https://raw.githubusercontent.com/unchama/kube-cluster-on-proxmox/"${TARGET_BRANCH}"/k8s-manifests/argocd-helm-chart-values.yaml
-helm install argocd argo/argocd-apps \
-    --version 0.0.1 \
-    --values https://raw.githubusercontent.com/unchama/kube-cluster-on-proxmox/"${TARGET_BRANCH}"/k8s-manifests/argocd-apps-helm-chart-values.yaml
+helm install -n argocd argocd argo/argo-cd
 
 
 cat <<EOF | kubectl apply -f -
@@ -402,8 +395,7 @@ discovery:
     apiServerEndpoint: "${KUBE_API_SERVER_VIP}:8443"
     token: "$KUBEADM_BOOTSTRAP_TOKEN"
     unsafeSkipCAVerification: true
-controlPlane:
-  certificateKey: "$KUBEADM_UPLOADED_CERTS"
+swsdwasdwasda wawa  certificateKey: "$KUBEADM_UPLOADED_CERTS"
 EOF
 
 # Set join configuration for worker nodes
