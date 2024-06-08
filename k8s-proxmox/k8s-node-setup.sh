@@ -355,9 +355,15 @@ helm install cilium cilium/cilium \
     --set k8sServicePort=8443
 
 # Install ArgoCD Helm chart
-kubectl create namespace argocd
 helm repo add argo https://argoproj.github.io/argo-helm
-helm install -n argocd argocd argo/argo-cd
+helm install argocd argo/argo-cd \
+    --version 5.36.10 \
+    --create-namespace \
+    --namespace argocd \
+    --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/"${TARGET_BRANCH}"/k8s-manifests/argocd-helm-chart-values.yaml
+helm install argocd argo/argocd-apps \
+    --version 0.0.1 \
+    --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/"${TARGET_BRANCH}"/k8s-manifests/argocd-apps-helm-chart-values.yaml
 
 
 cat <<EOF | kubectl apply -f -
