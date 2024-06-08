@@ -40,17 +40,9 @@ VM_LIST=(
 
 qm shutdown 1001
 qm destroy 1001
-qm shutdown 1002
-qm destroy 1002
-qm shutdown 1003
-qm destroy 1003
 
 qm shutdown 1101
 qm destroy 1101
-qm shutdown 1102
-qm destroy 1102
-qm shutdown 1103
-qm destroy 1103
 
 qm destroy 9050
 
