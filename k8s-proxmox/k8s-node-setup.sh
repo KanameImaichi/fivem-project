@@ -362,7 +362,7 @@ helm install argocd argo/argo-cd \
     --namespace argocd
 helm install argocd argo/argocd-apps \
     --version 0.0.1 \
-    --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-manifests/app/argocd/argocd-apps-helm-chart-values.yaml
+    --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-manifests/apps/argocd/argocd-apps-helm-chart-values.yaml
 
 
 cat <<EOF | kubectl apply -f -
