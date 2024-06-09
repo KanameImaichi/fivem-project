@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     path: nginx
-    repoURL: https://github.com/xxx/argocd-sample-app.git
+    repoURL: https://github.com/KanameImaichi/fivem-project.git
     targetRevision: main
   syncPolicy:
     automated: {}

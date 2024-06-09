@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: k8s-manifest/apps/installs #子Applicationのmanifestがあるディレクトリを指定する
-    repoURL: https://github.com/xxx/argocd-sample-app.git
+    repoURL: https://github.com/KanameImaichi/fivem-project.git
     targetRevision: main
   syncPolicy:
     automated: {}
