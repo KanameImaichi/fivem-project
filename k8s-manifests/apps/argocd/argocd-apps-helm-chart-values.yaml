@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: installs #子Applicationのmanifestがあるディレクトリを指定する
+    path: k8s-manifest/apps/installs #子Applicationのmanifestがあるディレクトリを指定する
     repoURL: https://github.com/xxx/argocd-sample-app.git
     targetRevision: main
   syncPolicy:
