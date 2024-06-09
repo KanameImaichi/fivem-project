@@ -8,7 +8,7 @@ applications:
     source:
       repoURL: https://github.com/KanameImaichi/fivem-project.git
       targetRevision: main
-      path: k8s-manifests/apps/root
+      path: installs
     destination:
       server: https://kubernetes.default.svc
       namespace: argocd

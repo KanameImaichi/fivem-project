@@ -359,8 +359,7 @@ helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd \
     --version 5.36.10 \
     --create-namespace \
-    --namespace argocd \
-    --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-manifests/argocd-helm-chart-values.yaml
+    --namespace argocd
 helm install argocd argo/argocd-apps \
     --version 0.0.1 \
     --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-manifests/argocd-apps-helm-chart-values.yaml
