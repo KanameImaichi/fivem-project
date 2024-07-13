@@ -142,9 +142,10 @@ image-endpoint: unix:///var/run/containerd/containerd.sock
 timeout: 10
 EOF
 
-sudo apt-get install -y nfs-common
 
+sudo apt install libnfs-utils
 sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools
+
 sudo tee /etc/multipath.conf <<-'EOF'
 defaults {
     user_friendly_names yes
@@ -153,16 +154,9 @@ defaults {
 EOF
 
 sudo systemctl enable multipath-tools.service
-
 sudo service multipath-tools restart
-
-sudo systemctl status multipath-tools
-
 sudo systemctl enable open-iscsi.service
-
 sudo service open-iscsi start
-
-sudo systemctl status open-iscsi
 
 
 # endregion
