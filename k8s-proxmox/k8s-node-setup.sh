@@ -271,6 +271,27 @@ kubeadm config images pull
 # install k9s
 wget https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_amd64.tar.gz -O - | tar -zxvf - k9s && sudo mv ./k9s /usr/local/bin/
 
+sudo apt-get install -y nfs-common
+sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools
+sudo tee /etc/multipath.conf <<-'EOF'
+defaults {
+    user_friendly_names yes
+    find_multipaths yes
+}
+EOF
+
+sudo systemctl enable multipath-tools.service
+
+sudo service multipath-tools restart
+
+sudo systemctl status multipath-tools
+
+sudo systemctl enable open-iscsi.service
+
+sudo service open-iscsi start
+
+sudo systemctl status open-iscsi
+
 # install velero client
 #VELERO_VERSION="v1.10.3"
 #wget https://github.com/vmware-tanzu/velero/releases/download/${VELERO_VERSION}/velero-${VELERO_VERSION}-linux-amd64.tar.gz
