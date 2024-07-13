@@ -143,7 +143,7 @@ timeout: 10
 EOF
 
 
-sudo apt install libnfs-utils
+sudo apt install -y libnfs-utils
 sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools
 
 sudo tee /etc/multipath.conf <<-'EOF'
