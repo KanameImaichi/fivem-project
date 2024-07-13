@@ -130,7 +130,6 @@ sysctl --system
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
-sudo apt-get update
 sudo apt-get install -y kubelet=1.29.3-1.1 kubeadm=1.29.3-1.1 kubectl=1.29.3-1.1
 sudo apt-mark hold kubelet kubeadm kubectl
 
@@ -142,6 +141,29 @@ runtime-endpoint: unix:///var/run/containerd/containerd.sock
 image-endpoint: unix:///var/run/containerd/containerd.sock
 timeout: 10
 EOF
+
+sudo apt-get install -y nfs-common
+
+sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools
+sudo tee /etc/multipath.conf <<-'EOF'
+defaults {
+    user_friendly_names yes
+    find_multipaths yes
+}
+EOF
+
+sudo systemctl enable multipath-tools.service
+
+sudo service multipath-tools restart
+
+sudo systemctl status multipath-tools
+
+sudo systemctl enable open-iscsi.service
+
+sudo service open-iscsi start
+
+sudo systemctl status open-iscsi
+
 
 # endregion
 
@@ -271,26 +293,7 @@ kubeadm config images pull
 # install k9s
 wget https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_amd64.tar.gz -O - | tar -zxvf - k9s && sudo mv ./k9s /usr/local/bin/
 
-sudo apt-get install -y nfs-common
-sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools
-sudo tee /etc/multipath.conf <<-'EOF'
-defaults {
-    user_friendly_names yes
-    find_multipaths yes
-}
-EOF
 
-sudo systemctl enable multipath-tools.service
-
-sudo service multipath-tools restart
-
-sudo systemctl status multipath-tools
-
-sudo systemctl enable open-iscsi.service
-
-sudo service open-iscsi start
-
-sudo systemctl status open-iscsi
 
 # install velero client
 #VELERO_VERSION="v1.10.3"
