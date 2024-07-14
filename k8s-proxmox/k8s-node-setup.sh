@@ -130,6 +130,7 @@ sysctl --system
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
+sudo apt-get update
 sudo apt-get install -y kubelet=1.29.3-1.1 kubeadm=1.29.3-1.1 kubectl=1.29.3-1.1
 sudo apt-mark hold kubelet kubeadm kubectl
 
@@ -270,8 +271,6 @@ kubeadm config images pull
 # install k9s
 wget https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_amd64.tar.gz -O - | tar -zxvf - k9s && sudo mv ./k9s /usr/local/bin/
 
-
-
 # install velero client
 #VELERO_VERSION="v1.10.3"
 #wget https://github.com/vmware-tanzu/velero/releases/download/${VELERO_VERSION}/velero-${VELERO_VERSION}-linux-amd64.tar.gz
@@ -348,12 +347,12 @@ chown "$(id -u)":"$(id -g)" "$HOME"/.kube/config
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
 # Install Cilium Helm chart
-#helm repo add cilium https://helm.cilium.io/
-#helm install cilium cilium/cilium \
-#    --namespace kube-system \
-#    --set kubeProxyReplacement=strict \
-#    --set k8sServiceHost=${KUBE_API_SERVER_VIP} \
-#    --set k8sServicePort=8443
+helm repo add cilium https://helm.cilium.io/
+helm install cilium cilium/cilium \
+    --namespace kube-system \
+    --set kubeProxyReplacement=strict \
+    --set k8sServiceHost=${KUBE_API_SERVER_VIP} \
+    --set k8sServicePort=8443
 
 # Install ArgoCD Helm chart
 #helm repo add argo https://argoproj.github.io/argo-helm
