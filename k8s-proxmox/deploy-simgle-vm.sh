@@ -88,3 +88,25 @@ qm set $VMID --cicustom "user=$SNIPPET_TARGET_VOLUME:snippets/$VMNAME-user.yaml,
 qm start $VMID
 
 echo "VM $VMID ($VMNAME) has been created and started."
+
+docker run -d \
+  --name FiveM \
+  --restart=on-failure \
+  -e LICENSE_KEY=cfxk_1G4cONU3fhLNI5lHJA1KE_3OafcW \
+  -p 30120:30120 \
+  -p 30120:30120/udp \
+  -v /volumes/fivem:/config \
+  -ti \
+  spritsail/fivem
+
+docker run -d \
+  --name FiveM \
+  --restart=on-failure \
+  -e NO_DEFAULT_CONFIG=1 \
+  -p 30120:30120 \
+  -p 30120:30120/udp \
+  -p 40120:40120 \
+  -v /volumes/fivem:/config \
+  -v /volumes/txData:/txData \
+  -ti \
+  spritsail/fivem

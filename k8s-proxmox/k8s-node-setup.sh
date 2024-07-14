@@ -355,14 +355,14 @@ helm install cilium cilium/cilium \
     --set k8sServicePort=8443
 
 # Install ArgoCD Helm chart
-#helm repo add argo https://argoproj.github.io/argo-helm
-#helm install argocd argo/argo-cd \
-#    --version 5.36.10 \
-#    --create-namespace \
-#    --namespace argocd
-#helm install argocd argo/argocd-apps \
-#    --version 0.0.1 \
-#    --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-manifests/apps/argocd/argocd-apps-helm-chart-values.yaml
+helm repo add argo https://argoproj.github.io/argo-helm
+helm install argocd argo/argo-cd \
+    --version 5.36.10 \
+    --create-namespace \
+    --namespace argocd
+helm install argocd argo/argocd-apps \
+    --version 0.0.1 \
+    --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-manifests/apps/argocd/argocd-apps-helm-chart-values.yaml
 
 # Install TrueNas democratic-csi
 helm repo add democratic-csi https://democratic-csi.github.io/charts/
