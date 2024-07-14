@@ -38,10 +38,10 @@ VM_LIST=(
 
 # delete existing vm
 
-qm shutdown 1001
+qm stop 1001
 qm destroy 1001
 
-qm shutdown 1101
+qm stop 1101
 qm destroy 1101
 
 qm destroy 9050
