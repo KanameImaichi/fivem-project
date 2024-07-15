@@ -149,7 +149,7 @@ config:
       gateway: '192.168.0.1'
   - type: nameserver
     address:
-    - '8.8.8.8'
+    - '192.168.0.1'
     search:
     - 'pve'
 EOF
