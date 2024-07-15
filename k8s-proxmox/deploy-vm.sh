@@ -92,7 +92,7 @@ do
         qm clone "${TEMPLATE_VMID}" "${vmid}" --name "${vmname}" --full true --target "${targethost}"
 
         # set compute resources
-        ssh -n "${targetip}" qm set "${vmid}" --cores "${cpu}" --memory "${mem}"
+        ssh -n "${targetip}" qm set "${vmid}" --cores "${cpu}" --memory "${mem}" --cpu host
 
         # move vm-disk to local
         ssh -n "${targetip}" qm move-disk "${vmid}" scsi0 "${BOOT_IMAGE_TARGET_VOLUME}" --delete true
