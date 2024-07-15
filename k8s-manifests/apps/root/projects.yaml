@@ -18,7 +18,6 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: "democratic-csi"
       server: https://kubernetes.default.svc
-
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
