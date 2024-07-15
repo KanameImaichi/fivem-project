@@ -41,16 +41,20 @@ metadata:
 spec:
   selector:
     app: fivem
+  type: NodePort
   ports:
     - name: "30120-tcp"
       protocol: TCP
       port: 30120
       targetPort: 30120
+      nodePort: 30120
     - name: "30120-udp"
       protocol: UDP
       port: 30120
       targetPort: 30120
+      nodePort: 30120
     - name: "40120"
       protocol: TCP
       port: 40120
       targetPort: 40120
+      nodePort: 32756

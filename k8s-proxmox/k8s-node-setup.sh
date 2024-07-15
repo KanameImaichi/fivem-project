@@ -362,13 +362,13 @@ helm install argocd argo/argo-cd \
     --namespace argocd
 helm install argocd argo/argocd-apps \
     --version 0.0.1 \
-    --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-manifests/apps/argocd/argocd-apps-helm-chart-values.yaml
+    --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-manifests/apps/cluster-wide-app-resources/argocd-apps-helm-chart-values.yaml
 
 # Install TrueNas democratic-csi
 helm repo add democratic-csi https://democratic-csi.github.io/charts/
 helm repo update
 helm search repo democratic-csi/
-helm upgrade --install --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-manifests/truenas-iscsi.yml --create-namespace --namespace democratic-csi trunas-iscsi democratic-csi/democratic-csi
+helm upgrade --install --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-manifests/apps/cluster-wide-app-resources/truenas-iscsi.yml --create-namespace --namespace democratic-csi trunas-iscsi democratic-csi/democratic-csi
 
 
 cat <<EOF | kubectl apply -f -
