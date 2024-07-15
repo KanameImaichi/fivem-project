@@ -12,15 +12,15 @@ spec:
       server: https://kubernetes.default.svc
     # k8s-manifests/apps/ で定義されている各種アプリケーションが稼働に必要なリソースのインストールを行う
     # そのため、project側でリソース追加先のnamespaceへの変更を明示的に許可する必要がある
-    - namespace: 'synology-csi'
-      server: https://kubernetes.default.svc
     - namespace: 'monitoring'
       server: https://kubernetes.default.svc
     - namespace: "democratic-csi"
       server: https://kubernetes.default.svc
+    - namespace: "kube-system"
+      server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
-      kind: '*'
+      kind: '*'y
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
