@@ -12,13 +12,20 @@ spec:
       server: https://kubernetes.default.svc
     # k8s-manifests/apps/ で定義されている各種アプリケーションが稼働に必要なリソースのインストールを行う
     # そのため、project側でリソース追加先のnamespaceへの変更を明示的に許可する必要がある
+    - namespace: 'kube-system'
+      server: https://kubernetes.default.svc
+    - namespace: 'metallb-system'
+      server: https://kubernetes.default.svc
     - namespace: 'synology-csi'
+      server: https://kubernetes.default.svc
+    - namespace: 'snapscheduler'
       server: https://kubernetes.default.svc
     - namespace: 'monitoring'
       server: https://kubernetes.default.svc
-    - namespace: "democratic-csi"
+    - namespace: 'velero'
       server: https://kubernetes.default.svc
-
+    - namespace: 'minio-for-velero'
+      server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
@@ -26,14 +33,14 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: fivem
+  name: mc-test
   namespace: argocd
 spec:
-  description: fivem yeahyeah
+  description: mc-test yeahyeah
   sourceRepos:
     - '*'
   destinations:
-    - namespace: fivem
+    - namespace: mc-test
       server: https://kubernetes.default.svc
     # Application 及び ApplicationSet リソースは
     # argocd namespace に置かないとArgoCDに認識されないため、

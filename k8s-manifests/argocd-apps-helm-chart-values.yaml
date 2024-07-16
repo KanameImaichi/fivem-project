@@ -1,12 +1,12 @@
 # Config values for the ArgoCD Helm Chart.
 # For default values, see
-# https://github.com/argoproj/argo-helm/blob/07d63255ae19ff1e08a22e71c932f686f8f619ackubectl get /charts/argocd-apps/Chart.yaml
+# https://github.com/argoproj/argo-helm/blob/07d63255ae19ff1e08a22e71c932f686f8f619ac/charts/argocd-apps/Chart.yaml
 applications:
   - name: argocd-root-app-of-apps
     namespace: argocd
     project: argocd-root
     source:
-      repoURL: https://github.com/KanameImaichi/fivem-project
+      repoURL: https://github.com/unchama/kube-cluster-on-proxmox
       targetRevision: main
       path: k8s-manifests/apps/root
     destination:

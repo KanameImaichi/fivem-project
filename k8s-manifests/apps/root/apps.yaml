@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/unchama/kube-cluster-on-proxmox
         revision: main
         directories:
           - path: k8s-manifests/apps/cluster-wide-apps/*
@@ -18,7 +18,7 @@ spec:
     spec:
       project: cluster-wide-apps
       source:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/unchama/kube-cluster-on-proxmox
         targetRevision: main
         path: "{{path}}"
       destination:
@@ -48,7 +48,7 @@ metadata:
 spec:
   project: argocd-root
   source:
-    repoURL: https://github.com/KanameImaichi/fivem-project
+    repoURL: https://github.com/unchama/kube-cluster-on-proxmox
     targetRevision: main
     path: k8s-manifests/apps/cluster-wide-app-resources
   destination:
@@ -71,29 +71,29 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: fivem-apps
+  name: mc-test-apps
   namespace: argocd
 spec:
   generators:
     - git:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/unchama/kube-cluster-on-proxmox
         revision: main
         directories:
-          - path: k8s-manifests/apps/fivem/*
+          - path: k8s-manifests/apps/mc-test/*
   template:
     metadata:
       # 各Application が argocd namespace に配置されるため prefix した方が安全
-      name: "fivem-{{path.basenameNormalized}}"
+      name: "mc-test-{{path.basenameNormalized}}"
       namespace: argocd
     spec:
-      project: fivem
+      project: mc-test
       source:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/unchama/kube-cluster-on-proxmox
         targetRevision: main
         path: "{{path}}"
       destination:
         server: https://kubernetes.default.svc
-        namespace: fivem
+        namespace: mc-test
       syncPolicy:
         automated:
           prune: true
