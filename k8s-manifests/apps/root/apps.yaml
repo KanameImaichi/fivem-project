@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/unchama/kube-cluster-on-proxmox
         revision: main
         directories:
           - path: k8s-manifests/apps/cluster-wide-apps/*
@@ -18,7 +18,7 @@ spec:
     spec:
       project: cluster-wide-apps
       source:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/unchama/kube-cluster-on-proxmox
         targetRevision: main
         path: "{{path}}"
       destination:
@@ -48,7 +48,7 @@ metadata:
 spec:
   project: argocd-root
   source:
-    repoURL: https://github.com/KanameImaichi/fivem-project
+    repoURL: https://github.com/unchama/kube-cluster-on-proxmox
     targetRevision: main
     path: k8s-manifests/apps/cluster-wide-app-resources
   destination:
@@ -76,7 +76,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/unchama/kube-cluster-on-proxmox
         revision: main
         directories:
           - path: k8s-manifests/apps/fivem/*
@@ -88,7 +88,7 @@ spec:
     spec:
       project: fivem
       source:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/unchama/kube-cluster-on-proxmox
         targetRevision: main
         path: "{{path}}"
       destination:
