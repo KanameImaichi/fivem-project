@@ -16,7 +16,7 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: 'metallb-system'
       server: https://kubernetes.default.svc
-    - namespace: 'synology-csi'
+    - namespace: 'democtatic-csi'
       server: https://kubernetes.default.svc
     - namespace: 'snapscheduler'
       server: https://kubernetes.default.svc
