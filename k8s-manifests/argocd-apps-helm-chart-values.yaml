@@ -6,7 +6,7 @@ applications:
     namespace: argocd
     project: argocd-root
     source:
-      repoURL: https://github.com/KanameImaichi/fivem-project
+      repoURL: https://github.com/unchama/kube-cluster-on-proxmox
       targetRevision: main
       path: k8s-manifests/apps/root
     destination:
