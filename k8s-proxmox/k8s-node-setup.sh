@@ -362,7 +362,7 @@ helm install argocd argo/argo-cd \
     --namespace argocd
 helm install argocd argo/argocd-apps \
     --version 0.0.1 \
-    --values https://raw.githubusercontent.com/unchama/kube-cluster-on-proxmox/main/k8s-manifests/argocd-apps-helm-chart-values.yaml
+    --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-manifests/argocd-apps-helm-chart-values.yaml
 
 # Install TrueNas democratic-csi
 #helm repo add democratic-csi https://democratic-csi.github.io/charts/
