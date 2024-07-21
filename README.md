@@ -6,11 +6,12 @@ bash ./deploy-vm.sh
 ```
 
 ## ArgoCDの設定
-外部からアクセスできるように変更
+LBのポートを確認する
 ```shell
-kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+kubectl get services -n argocd
 ```
 初期パスワードの取得
+adminでログイン
 ```shell
 kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```

@@ -10,7 +10,7 @@ spec:
   source:
     chart: democratic-csi/democratic-csi
     repoURL: https://democratic-csi.github.io/charts/
-    targetRevision: 0.14.6
+    targetRevision: 0.13.1
     helm:
       releaseName: truenas-iscsi
       # https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-blackbox-exporter/values.yaml
