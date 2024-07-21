@@ -70,7 +70,7 @@ spec:
               extentAvailThreshold: 0
   destination:
     server: https://kubernetes.default.svc
-    namespace: democtatic-csi
+    namespace: democratic-csi
   syncPolicy:
     automated:
       prune: true
