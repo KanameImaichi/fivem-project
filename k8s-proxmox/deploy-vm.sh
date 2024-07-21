@@ -40,10 +40,10 @@ VM_LIST=(
 
 qm stop 1001
 qm destroy 1001
-qm stop 1002
-qm destroy 1002
-qm stop 1003
-qm destroy 1003
+qm stop 1102
+qm destroy 1102
+qm stop 1103
+qm destroy 1103
 
 qm stop 1101
 qm destroy 1101
