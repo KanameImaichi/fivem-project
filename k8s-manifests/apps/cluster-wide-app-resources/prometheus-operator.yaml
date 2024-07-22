@@ -7,7 +7,7 @@ spec:
   project: cluster-wide-apps
   source:
     repoURL: https://github.com/prometheus-community/helm-charts
-    chart: kube-prometheus-stack
+    chart: kube-prometheus-stack/kube-prometheus-stack
     targetRevision: kube-prometheus-stack-51.2.0
     directory:
       recurse: true
