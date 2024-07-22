@@ -21,17 +21,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: prometheus-nodeport
-  namespace: monitoring
-spec:
-  type: NodePort
-  ports:
-    - port: 8080
-      targetPort: 8080
-      nodePort: 30090 # ここで外部からアクセスするためのポートを指定します
-  selector:
-    app: prometheus
