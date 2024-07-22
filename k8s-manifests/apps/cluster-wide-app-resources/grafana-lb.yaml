@@ -11,5 +11,7 @@ spec:
       targetPort: server
   selector:
     app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/name: prometheus-grafana
+
   type: LoadBalancer
   loadBalancerIP: 172.16.3.241
