@@ -10,7 +10,6 @@ spec:
       protocol: TCP
       targetPort: 3000
   selector:
-    app.kubernetes.io/instance: prometheus
-    app.kubernetes.io/name: grafana
+    app.kubernetes.io/name: prometheus-grafana
   type: LoadBalancer
   loadBalancerIP: 172.16.3.241
