@@ -18,6 +18,8 @@ spec:
         githubConfigSecret: arc-secret
         authSecret:
           create: true
+          github_token: "dummy"
+
   destination:
     server: https://kubernetes.default.svc
     namespace: arc-systems
