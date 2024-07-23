@@ -8,3 +8,19 @@ spec:
   template:
     spec:
       repository: KanameImaichi/fivem-serverlist
+      env:
+        - name: GITHUB_APP_ID
+          valueFrom:
+            secretKeyRef:
+              key: github_app_id
+              name: gha-secret
+        - name: GITHUB_APP_INSTALLATION_ID
+          valueFrom:
+            secretKeyRef:
+              key: github_app_installation_id
+              name: gha-secret
+        - name: GITHUB_APP_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: github_app_private_key
+              name: gha-secret
