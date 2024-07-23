@@ -2,6 +2,7 @@ apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
   name: example-runnerdeploy
+  namespace: external-secrets
 spec:
   replicas: 1
   template:
