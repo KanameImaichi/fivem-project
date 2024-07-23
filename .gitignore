@@ -2,3 +2,4 @@
 ./k8s-manifests/secret/*
 /k8s-manifests/secret/service-account.yaml
 /k8s-manifests/secret/arc.yaml
+/k8s-manifests/secret/gcpsm-secret.yaml
