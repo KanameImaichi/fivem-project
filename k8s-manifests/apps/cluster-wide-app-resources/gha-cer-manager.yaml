@@ -8,9 +8,12 @@ metadata:
 spec:
   project: cluster-wide-apps
   source:
-    chart: jetstack
-    repoURL: https://charts.jetstack.io
+    chart: cert-manager
+    repoURL: https://charts.jetstack.io/
     targetRevision: 1.15.1
+  helm:
+    crds:
+      enabled:true
   destination:
     server: https://kubernetes.default.svc
     namespace: arc-systems
