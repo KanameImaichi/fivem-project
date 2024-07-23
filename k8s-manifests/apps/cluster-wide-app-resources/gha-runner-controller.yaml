@@ -8,9 +8,14 @@ metadata:
 spec:
   project: cluster-wide-apps
   source:
-    chart: gha-runner-scale-set-controller
-    repoURL: ghcr.io/actions/actions-runner-controller-charts/
+    chart: actions-runner-controller/actions-runner-controller
+    repoURL: https://actions-runner-controller.github.io/actions-runner-controller
     targetRevision: 0.9.3
+    helm:
+      releaseName:
+      values: |
+        githubConfigUrl : https://github.com/KanameImaichi/fivem-serverlist
+        githubConfigSecret: arc-secret
   destination:
     server: https://kubernetes.default.svc
     namespace: arc-systems
