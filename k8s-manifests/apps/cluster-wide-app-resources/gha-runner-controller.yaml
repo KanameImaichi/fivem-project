@@ -8,8 +8,8 @@ metadata:
 spec:
   project: cluster-wide-apps
   source:
-    chart: arc
-    repoURL: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
+    chart: actions-runner-controller
+    repoURL: https://actions-runner-controller.github.io/actions-runner-controller
     targetRevision: 0.9.3
     helm:
       releaseName:
