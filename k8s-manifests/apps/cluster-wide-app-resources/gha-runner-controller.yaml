@@ -16,7 +16,7 @@ spec:
       values: |
         authSecret:
           enabled : true
-          create: false
+          create: true
         githubWebhookServer:
           enabled: false
 
