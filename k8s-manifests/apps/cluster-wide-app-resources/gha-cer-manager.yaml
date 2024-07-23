@@ -1,24 +1,24 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: cert-manager
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
-spec:
-  project: cluster-wide-apps
-  source:
-    chart: cert-manager
-    repoURL: https://charts.jetstack.io/
-    targetRevision: 1.15.0
-    helm:
-      crds:
-        enabled: true
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: cert-manager
-  syncPolicy:
-    automated:
-      prune: true
-    syncOptions:
-      - CreateNamespace=true
+#apiVersion: argoproj.io/v1alpha1
+#kind: Application
+#metadata:
+#  name: cert-manager
+#  namespace: argocd
+#  finalizers:
+#    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+#spec:
+#  project: cluster-wide-apps
+#  source:
+#    chart: cert-manager
+#    repoURL: https://charts.jetstack.io/
+#    targetRevision: 1.15.0
+#    helm:
+#      crds:
+#        enabled: true
+#  destination:
+#    server: https://kubernetes.default.svc
+#    namespace: cert-manager
+#  syncPolicy:
+#    automated:
+#      prune: true
+#    syncOptions:
+#      - CreateNamespace=true
