@@ -17,25 +17,23 @@ spec:
         authSecret:
           enabled : true
           create: true
-        githubWebhookServer:
-          enabled: false
-        env:
-          - name: GITHUB_APP_ID
+          github_app_id: 
             valueFrom:
               secretKeyRef:
                 key: github_app_id
                 name: gha-secret
-          - name: GITHUB_APP_INSTALLATION_ID
+          github_app_installation_id:
             valueFrom:
               secretKeyRef:
                 key: github_app_installation_id
                 name: gha-secret
-          - name: GITHUB_APP_PRIVATE_KEY
+          github_app_private_key:
             valueFrom:
               secretKeyRef:
                 key: github_app_private_key
                 name: gha-secret
-  
+        githubWebhookServer:
+          enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: arc-systems
