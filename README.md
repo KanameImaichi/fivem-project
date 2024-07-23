@@ -10,6 +10,9 @@ bash ./deploy-vm.sh
 
 ./deploy-vmと/ansible/hosts/k8s-servers/inventory に追記する
 
+- [k8s-servers-wk-with-ssh]
+- [k8s-servers]
+
 ## ArgoCDの設定
 
 LBのポートを確認する
