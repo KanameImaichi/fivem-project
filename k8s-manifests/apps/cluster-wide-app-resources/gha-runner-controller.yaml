@@ -17,8 +17,11 @@ spec:
         githubConfigUrl : https://github.com/KanameImaichi/fivem-serverlist
         githubConfigSecret: arc-secret
         authSecret:
-          create: true
-          github_token: "dummy"
+          enabled : true
+          create: false
+          name: "gha-secret"
+        githubWebhookServer:
+          enabled: false
 
   destination:
     server: https://kubernetes.default.svc
