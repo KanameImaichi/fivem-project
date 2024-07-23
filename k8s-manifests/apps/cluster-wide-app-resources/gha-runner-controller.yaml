@@ -16,6 +16,8 @@ spec:
       values: |
         githubConfigUrl : https://github.com/KanameImaichi/fivem-serverlist
         githubConfigSecret: arc-secret
+        authSecret:
+          create: true
   destination:
     server: https://kubernetes.default.svc
     namespace: arc-systems
