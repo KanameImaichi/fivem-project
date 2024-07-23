@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: arc-controller
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+spec:
+  project: cluster-wide-apps
+  source:
+    chart: jetstack
+    repoURL: https://charts.jetstack.io
+    targetRevision: 1.15.1
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: arc-systems
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
