@@ -20,7 +20,7 @@ spec:
         scope:
           singleNamespace: false
         authSecret:
-          enabled: false
+          enabled: true
         env:
           - name: GITHUB_TOKEN
             valueFrom:
