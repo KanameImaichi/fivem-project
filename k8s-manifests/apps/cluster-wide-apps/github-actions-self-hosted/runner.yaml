@@ -8,3 +8,9 @@ spec:
   template:
     spec:
       repository: KanameImaichi/fivem-serverlist
+      env:
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: github_token
+              name: gha-secret

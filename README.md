@@ -30,7 +30,6 @@ kubectl get services -n argocd
 
 ```shell
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-
 ```
 
 ### 初期パスワードの取得
@@ -42,4 +41,50 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
 
+# External Secret Operator
 
+GCPのSecretManagerでGithub Actions Self Hosted などのSecretの管理取得を行っている。
+サービスアカウントキーを使用してGCPへの認証を行うためSecretを追加する。
+
+```shell
+kubectl apply -f gcpsm-secret.yaml -n external-secrets
+```
+
+サンプルは以下の通り。
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gcpsm-secret
+  namespace: external-secrets
+  labels:
+    type: gcpsm
+type: Opaque
+stringData:
+  secret-access-credentials: |
+    {
+      "type": "service_account",
+      "project_id": "XXXXXXXXXX",
+      "private_key_id": "XXXXXXXXXXXXXXXXXXX",
+      "private_key": "XXXXXXXXXXXXXXXXXXXXX",
+      "client_email": "XXXXXXXXXXXX",
+      "client_id": "XXXXXXXXXXXXX",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_x509_cert_url": "xxxxxxxxxxxxxxxxxxxx",
+      "universe_domain": "googleapis.com"
+    }
+
+
+```
+
+curl -L \
+-X POST \
+-H "Accept: application/vnd.github+json" \
+-H "Authorization: Bearer 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" \
+-H "X-GitHub-Api-Version: 2022-11-28" \
+https://api.github.com/repos/KanameImaichi/fivem-serverlist/actions/runners/registration-token
+
+kubectl get secret gha-secret -n external-secrets -o jsonpath='{.data}'
