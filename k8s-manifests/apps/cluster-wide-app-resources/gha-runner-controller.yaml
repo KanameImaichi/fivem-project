@@ -16,6 +16,17 @@ spec:
       values: |
         githubWebhookServer:
           enabled: false
+        certManagerEnabled: true
+        scope:
+          singleNamespace: false
+        authSecret:
+          enabled: false
+        env:
+          - name: GITHUB_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: github_token
+                name: gha-secret        
 
   destination:
     server: https://kubernetes.default.svc
