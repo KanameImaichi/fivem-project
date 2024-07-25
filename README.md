@@ -47,7 +47,8 @@ GCPのSecretManagerでGithub Actions Self Hosted などのSecretの管理取得�
 サービスアカウントキーを使用してGCPへの認証を行うためSecretを追加する。
 
 ```shell
-kubectl apply -f gcpsm-secret.yaml -n external-secrets
+kubectl create namespace server-list
+kubectl apply -f gcpsm-secret.yaml -n server-list 
 ```
 
 サンプルは以下の通り。

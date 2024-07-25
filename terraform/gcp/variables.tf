@@ -1,6 +1,6 @@
 variable "project_id" {
   type    = string
-  default = "kubernetes"
+  default = "scientific-base-418013"
 }
 
 variable "region" {

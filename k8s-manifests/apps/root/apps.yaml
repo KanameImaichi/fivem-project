@@ -127,7 +127,7 @@ spec:
         path: "{{path}}"
       destination:
         server: https://kubernetes.default.svc
-        namespace: server-list-apps
+        namespace: server-list
       syncPolicy:
         automated:
           prune: true
