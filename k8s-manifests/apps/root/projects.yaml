@@ -30,7 +30,7 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: 'cert-manager'
       server: https://kubernetes.default.svc
-    - namespace: 'mc-test'
+    - namespace: 'fivem'
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'

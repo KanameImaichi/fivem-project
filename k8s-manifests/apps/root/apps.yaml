@@ -139,7 +139,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: mc-test-apps
+  name: fivem-apps
   namespace: argocd
 spec:
   generators:
@@ -147,21 +147,21 @@ spec:
         repoURL: https://github.com/unchama/kube-cluster-on-proxmox
         revision: main
         directories:
-          - path: k8s-manifests/apps/mc-test/*
+          - path: k8s-manifests/apps/fivem/*
   template:
     metadata:
       # 各Application が argocd namespace に配置されるため prefix した方が安全
-      name: "mc-test-{{path.basenameNormalized}}"
+      name: "fivem-{{path.basenameNormalized}}"
       namespace: argocd
     spec:
-      project: mc-test
+      project: fivem
       source:
-        repoURL: https://github.com/unchama/kube-cluster-on-proxmox
+        repoURL: https://github.com/KanameImaichi/fivem-project
         targetRevision: main
         path: "{{path}}"
       destination:
         server: https://kubernetes.default.svc
-        namespace: mc-test
+        namespace: fivem
       syncPolicy:
         automated:
           prune: true
