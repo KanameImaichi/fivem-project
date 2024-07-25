@@ -38,4 +38,3 @@ spec:
       - CreateNamespace=true
       - Replace=true
       #      https://github.com/actions/actions-runner-controller/issues/2565
-      - ServerSideApply=true
