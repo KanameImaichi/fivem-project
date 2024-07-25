@@ -24,7 +24,7 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: 'arc-systems'
       server: https://kubernetes.default.svc
-    - namespace: 'arc-runners'
+    - namespace: 'actions-runner-system'
       server: https://kubernetes.default.svc
     - namespace: 'external-secrets'
       server: https://kubernetes.default.svc
