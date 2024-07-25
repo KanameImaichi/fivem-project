@@ -22,13 +22,15 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: 'democratic-csi'
       server: https://kubernetes.default.svc
-    - namespace: 'arc-systems'
+    - namespace: 'arc-controller'
       server: https://kubernetes.default.svc
-    - namespace: 'actions-runner-system'
+    - namespace: 'server-list'
       server: https://kubernetes.default.svc
     - namespace: 'external-secrets'
       server: https://kubernetes.default.svc
     - namespace: 'cert-manager'
+      server: https://kubernetes.default.svc
+    - namespace: 'fivem'
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'

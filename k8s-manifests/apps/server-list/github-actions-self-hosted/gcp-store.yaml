@@ -2,7 +2,7 @@ apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
 metadata:
   name: gha-gcp-store
-  namespace: actions-runner-system
+  namespace: server-list
 spec:
   provider:
     gcpsm: # gcpsm provider

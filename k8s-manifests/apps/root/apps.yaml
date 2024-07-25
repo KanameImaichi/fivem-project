@@ -83,7 +83,7 @@ spec:
   template:
     metadata:
       # 各Application が argocd namespace に配置されるため prefix した方が安全
-      name: "mc-test-{{path.basenameNormalized}}"
+      name: "fivem-{{path.basenameNormalized}}"
       namespace: argocd
     spec:
       project: fivem-apps
@@ -94,6 +94,40 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: fivem
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: true
+        syncOptions:
+          - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: server-list-apps
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/KanameImaichi/fivem-project
+        revision: main
+        directories:
+          - path: k8s-manifests/apps/server-list/*
+  template:
+    metadata:
+      # 各Application が argocd namespace に配置されるため prefix した方が安全
+      name: "server-list-{{path.basenameNormalized}}"
+      namespace: argocd
+    spec:
+      project: server-list-apps
+      source:
+        repoURL: https://github.com/unchama/kube-cluster-on-proxmox
+        targetRevision: main
+        path: "{{path}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: server-list-apps
       syncPolicy:
         automated:
           prune: true

@@ -30,7 +30,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: actions-runner-system
+    namespace: arc-controller
   syncPolicy:
     automated:
       prune: true
