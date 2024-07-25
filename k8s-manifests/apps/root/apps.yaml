@@ -76,7 +76,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/KanameImaichi/server-list-project
+        repoURL: https://github.com/KanameImaichi/fivem-project
         revision: main
         directories:
           - path: k8s-manifests/apps/fivem/*
@@ -116,7 +116,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/KanameImaichi/server-list-project
+        repoURL: https://github.com/KanameImaichi/fivem-project
         revision: main
         directories:
           - path: k8s-manifests/apps/server-list/*
@@ -128,7 +128,7 @@ spec:
     spec:
       project: server-list
       source:
-        repoURL: https://github.com/KanameImaichi/server-list-project
+        repoURL: https://github.com/KanameImaichi/fivem-project
         targetRevision: main
         path: "{{path}}"
       destination:
