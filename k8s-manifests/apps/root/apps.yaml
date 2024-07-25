@@ -88,7 +88,7 @@ spec:
     spec:
       project: fivem-apps
       source:
-        repoURL: https://github.com/unchama/kube-cluster-on-proxmox
+        repoURL: https://github.com/KanameImaichi/fivem-project
         targetRevision: main
         path: "{{path}}"
       destination:
@@ -122,7 +122,7 @@ spec:
     spec:
       project: server-list-apps
       source:
-        repoURL: https://github.com/unchama/kube-cluster-on-proxmox
+        repoURL: https://github.com/KanameImaichi/fivem-project
         targetRevision: main
         path: "{{path}}"
       destination:
