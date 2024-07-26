@@ -10,7 +10,7 @@ spec:
   source:
     chart: grafana
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 6.3.6
+    targetRevision: 8.3.6
     helm:
       service:
         type: NodePort
