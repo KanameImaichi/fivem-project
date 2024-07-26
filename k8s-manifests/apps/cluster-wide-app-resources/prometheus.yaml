@@ -19,7 +19,7 @@ spec:
           persistentVolume:
             enabled: false
           service:
-            type: NodePort
+            type: LoadBalancer
         alertmanager:
           persistence:
             enabled: false

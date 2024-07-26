@@ -16,7 +16,7 @@ spec:
       # https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-blackbox-exporter/values.yaml
       values: |
         service:
-          type: NodePort
+          type: LoadBalancer
         
         # (1) Prometheus Serverとの連携
         datasources:
