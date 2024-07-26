@@ -13,7 +13,7 @@ spec:
     targetRevision: 8.3.6
     helm:
       service:
-        type: NodePort
+        type: LoadBalancer
 
       # (1) Prometheus Serverとの連携
       datasources:
