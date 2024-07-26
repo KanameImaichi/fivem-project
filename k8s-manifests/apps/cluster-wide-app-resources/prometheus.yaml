@@ -12,14 +12,17 @@ spec:
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 25.24.1
     helm:
-      server:
-        persistentVolume:
-          enabled: false
-        service:
-          type: LoadBalancer
-      alertmanager:
-        persistence:
-          enabled: false
+      releaseName: prometheus
+      # https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-blackbox-exporter/values.yaml
+      values: |
+        server:
+          persistentVolume:
+            enabled: false
+          service:
+            type: LoadBalancer
+        alertmanager:
+          persistence:
+            enabled: false
 
   destination:
     server: https://kubernetes.default.svc

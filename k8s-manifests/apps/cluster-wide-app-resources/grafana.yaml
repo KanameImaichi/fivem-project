@@ -12,39 +12,42 @@ spec:
     repoURL: https://grafana.github.io/helm-charts
     targetRevision: 8.3.6
     helm:
-      service:
-        type: LoadBalancer
-
-      # (1) Prometheus Serverとの連携
-      datasources:
-        datasources.yaml:
-          apiVersion: 1
-          datasources:
-            - name: "Prometheus"
-              type: prometheus
-              access: proxy
-              url: http://prometheus-server.monitoring.svc.cluster.local
-
-      # (2) Dashboardの基本設定
-      dashboardProviders:
-        dashboardproviders.yaml:
-          apiVersion: 1
-          providers:
-            - name: 'default'
-              orgId: 1
-              folder: ''
-              type: file
-              disableDeletion: false
-              editable: true
-              options:
-                path: /var/lib/grafana/dashboards/default
-
-      # (3) Node exporterのDashboardを追加する設定
-      dashboards:
-        default:
-          node-exporter:
-            datasource: Prometheus
-            url: https://grafana.com/api/dashboards/1860/revisions/32/download
+      releaseName: grafana
+      # https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-blackbox-exporter/values.yaml
+      values: |
+        service:
+          type: LoadBalancer
+        
+        # (1) Prometheus Serverとの連携
+        datasources:
+          datasources.yaml:
+            apiVersion: 1
+            datasources:
+              - name: "Prometheus"
+                type: prometheus
+                access: proxy
+                url: http://prometheus-server.monitoring.svc.cluster.local
+        
+        # (2) Dashboardの基本設定
+        dashboardProviders:
+          dashboardproviders.yaml:
+            apiVersion: 1
+            providers:
+              - name: 'default'
+                orgId: 1
+                folder: ''
+                type: file
+                disableDeletion: false
+                editable: true
+                options:
+                  path: /var/lib/grafana/dashboards/default
+        
+        # (3) Node exporterのDashboardを追加する設定
+        dashboards:
+          default:
+            node-exporter:
+              datasource: Prometheus
+              url: https://grafana.com/api/dashboards/1860/revisions/32/download
 
   destination:
     server: https://kubernetes.default.svc
@@ -52,7 +55,6 @@ spec:
   syncPolicy:
     automated:
       prune: true
-      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
