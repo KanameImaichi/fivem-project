@@ -70,3 +70,12 @@ stringData:
 
 
 ```
+
+# Grafana
+
+以下のコマンドでパスワードを取得する
+
+```shell
+kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-user}' | base64 -d; echo
+kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-password}' | base64 -d; echo
+```

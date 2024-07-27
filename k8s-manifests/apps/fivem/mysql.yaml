@@ -1,23 +1,81 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: v1
+kind: Service
 metadata:
-  name: mysql
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+  name: mysql-server
 spec:
-  project: cluster-wide-apps
-  source:
-    chart: mysql
-    repoURL: oci://registry-1.docker.io/bitnamicharts/mysql
-    targetRevision: 8.4.2
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: monitoring
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
+  type: LoadBalancer
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+      protocol: TCP
+  selector:
+    app: mysql-server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-server
+spec:
+  selector:
+    matchLabels:
+      app: mysql-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql-server
+    spec:
+      containers:
+        - image: mysql:5.7
+          name: mysql
+          resources:
+          env:
+            - name: MYSQL_USER
+              value: devuser
+            - name: MYSQL_PASSWORD
+              value: devuser
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+            - name: LANG
+              value: C.UTF-8
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: mysql-server-initdb
+              mountPath: /docker-entrypoint-initdb.d
+            - name: mysql-server-conf
+              mountPath: /etc/mysql/conf.d
+      volumes:
+        - name: mysql-server-initdb
+          configMap:
+            name: mysql-server-initdb-config
+        - name: mysql-server-conf
+          configMap:
+            name: mysql-server-conf-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-server-initdb-config
+data:
+  createdb.sql: |
+    CREATE
+    DATABASE job1;
+    CREATE
+    DATABASE job2;
+    GRANT ALL
+    ON job1.* TO devuser;
+    GRANT ALL
+    ON job2.* TO devuser;
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-server-conf-config
+data:
+  custom.cnf: |
+    [mysqld]
+    character-set-server=utf8
