@@ -1,7 +1,7 @@
 apiVersion: k8s.mariadb.com/v1alpha1
 kind: MariaDB
 metadata:
-  namespace: seichi-minecraft
+  namespace: server-list
   name: mariadb
 spec:
   rootPasswordSecretKeyRef:
