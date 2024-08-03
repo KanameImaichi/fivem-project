@@ -22,7 +22,7 @@ variable "repository_organization_name" {
 
 variable "repository_name" {
   type    = string
-  default = "fivem-project"
+  default = "fivem-server-list"
 }
 
 variable "repository_organization_name_infra" {

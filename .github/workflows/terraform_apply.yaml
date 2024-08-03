@@ -11,7 +11,9 @@ jobs:
   tf_apply:
     name: tf apply
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: "read"
+      id-token: "write"
     concurrency: tf_apply_on_main
 
     steps:
@@ -31,7 +33,7 @@ jobs:
         name: "Authenticate to Google Cloud"
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: "projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-action-deploy-pool/providers/github-actions-provider"
+          workload_identity_provider: "projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-action-deploy-pool-infra/providers/github-actions-provider-infra"
           service_account: "github-actions-deployer@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
           access_token_lifetime: 1200s
 
