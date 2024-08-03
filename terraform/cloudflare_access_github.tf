@@ -1,7 +1,7 @@
 # シークレットの値をローカル変数に格納
 locals {
-  cloudflare_sso_github_client_id = jsondecode(data.google_secret_manager_secret_version.cloudflare_sso_github_client_id.secret_data)
-  cloudflare_sso_github_client_secret = jsondecode(data.google_secret_manager_secret_version.cloudflare_sso_github_client_secret.secret_data)
+  cloudflare_sso_github_client_id     = data.google_secret_manager_secret_version.cloudflare_sso_github_client_id.secret_data
+  cloudflare_sso_github_client_secret = data.google_secret_manager_secret_version.cloudflare_sso_github_client_secret.secret_data
 }
 
 resource "cloudflare_access_identity_provider" "github_sso" {
