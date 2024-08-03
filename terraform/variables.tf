@@ -1,6 +1,6 @@
 variable "project_id" {
   type    = string
-  default = "scientific-base-418013"
+  default = "commet-431413"
 }
 
 variable "region" {

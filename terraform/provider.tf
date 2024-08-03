@@ -22,7 +22,7 @@ terraform {
     }
   }
   backend "gcs" {
-    bucket = "commet-terraform-state-test"
+    bucket = "commet-terraform"
     prefix = "dev/k8s"
   }
 }
