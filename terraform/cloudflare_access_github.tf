@@ -15,7 +15,7 @@ resource "google_secret_manager_secret" "cloudflare_sso_github_client_id" {
   }
 }
 
-data "google_secret_manager_secret_version" "gcp_secrets" {
+data "google_secret_manager_secret_version" "cloudflare_sso_github_client_id" {
   secret  = google_secret_manager_secret.cloudflare_sso_github_client_id.id
   version = "latest"
 }
@@ -27,16 +27,15 @@ resource "google_secret_manager_secret" "cloudflare_sso_github_client_secret" {
   }
 }
 
-# シークレットから最新バージョンを取得する設定
-data "google_secret_manager_secret_version" "gcp_secrets" {
+data "google_secret_manager_secret_version" "cloudflare_sso_github_client_secret" {
   secret  = google_secret_manager_secret.cloudflare_sso_github_client_secret.id
   version = "latest"
 }
 
 # シークレットの値をローカル変数に格納
 locals {
-  cloudflare_sso_github_client_id = jsondecode(data.google_secret_manager_secret_version.gcp_secrets.secret_data)
-  cloudflare_sso_github_client_secret = jsondecode(data.google_secret_manager_secret_version.gcp_secrets.secret_data)
+  cloudflare_sso_github_client_id = jsondecode(data.google_secret_manager_secret_version.cloudflare_sso_github_client_id.secret_data)
+  cloudflare_sso_github_client_secret = jsondecode(data.google_secret_manager_secret_version.cloudflare_sso_github_client_secret.secret_data)
 }
 
 resource "cloudflare_access_identity_provider" "github_sso" {
