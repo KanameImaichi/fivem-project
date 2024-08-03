@@ -70,4 +70,15 @@ variable "iam_roles" {
   ]
 }
 
+variable "github_actions_roles" {
+  type = list(string)
+  default = [
+    "roles/run.admin",
+    "roles/storage.admin",
+    "roles/storage.objectAdmin",
+    "roles/iam.serviceAccountUser",
+    "roles/artifactregistry.writer",
+    "roles/secretmanager.secretAccessor"
+  ]
+}
 # Roles for service account which will be used to deploy Cloud Run by GHA.
