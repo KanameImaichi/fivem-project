@@ -1,28 +1,3 @@
-import {
-  id = "secret"
-  to = google_secret_manager_secret.terraform_secrets
-}
-
-# Terraformで利用するシークレット
-resource "google_secret_manager_secret" "terraform_secrets" {
-  secret_id = "secret"
-  replication {
-    automatic = true
-  }
-}
-
-# シークレットから最新バージョンを取得する設定
-data "google_secret_manager_secret_version" "gcp_secrets" {
-  secret  = google_secret_manager_secret.terraform_secrets.id
-  version = "latest"
-}
-
-# シークレットの値をローカル変数に格納
-locals {
-  github_cloudflare_oauth_client_id     = jsondecode(data.google_secret_manager_secret_version.gcp_secrets.secret_data)["github_cloudflare_oauth_client_id"]
-  github_cloudflare_oauth_client_secret = jsondecode(data.google_secret_manager_secret_version.gcp_secrets.secret_data)["github_cloudflare_oauth_client_secret"]
-}
-
 variable "project_id" {
   type    = string
   default = "scientific-base-418013"
