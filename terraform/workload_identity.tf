@@ -66,7 +66,7 @@ resource "google_iam_workload_identity_pool_provider" "github_actions_infra" {
 
 # # Add workload identity user role to the service account.
 resource "google_service_account_iam_member" "workload_identity_account_iam_infra" {
-  service_account_id = google_service_account.github_actions.name
+  service_account_id = google_service_account.github_actions_builder.name
   role               = "roles/iam.workloadIdentityUser"
   member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github_actions_infra.name}/attribute.repository/${var.repository_organization_name_infra}/${var.repository_name_infra}"
 }

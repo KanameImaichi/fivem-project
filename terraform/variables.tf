@@ -81,4 +81,10 @@ variable "github_actions_roles" {
     "roles/secretmanager.secretAccessor"
   ]
 }
+variable "github_actions_builder_roles" {
+  type = list(string)
+  default = [
+    "roles/owner",
+  ]
+}
 # Roles for service account which will be used to deploy Cloud Run by GHA.
