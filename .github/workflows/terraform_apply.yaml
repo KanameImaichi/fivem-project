@@ -4,7 +4,9 @@ on:
     branches:
       - "main"
   workflow_dispatch:
-
+env:
+  GCP_PROJECT_ID: scientific-base-418013
+  GCP_PROJECT_NUMBER: 879914464587
 jobs:
   tf_apply:
     name: tf apply
@@ -20,7 +22,18 @@ jobs:
 
       #      - name: Open tunnel to OnP k8s cluster
       #        run: bash "./.github/workflows/scripts/open-tunnel-to-onp-k8s.sh"
+      - name: loud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.GCP_PROJECT_ID }}
 
+      - id: auth
+        name: "Authenticate to Google Cloud"
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: "projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-action-deploy-pool/providers/github-actions-provider"
+          service_account: "github-actions-deployer@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
+          access_token_lifetime: 1200s
 
       - run: terraform init
         working-directory: "./terraform"
