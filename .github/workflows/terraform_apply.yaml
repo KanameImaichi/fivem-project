@@ -5,8 +5,8 @@ on:
       - "main"
   workflow_dispatch:
 env:
-  GCP_PROJECT_ID: scientific-base-418013
-  GCP_PROJECT_NUMBER: 879914464587
+  GCP_PROJECT_ID: commet-431413
+  GCP_PROJECT_NUMBER: 260516937387
 jobs:
   tf_apply:
     name: tf apply
