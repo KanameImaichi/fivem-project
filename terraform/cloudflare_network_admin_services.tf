@@ -35,7 +35,7 @@ resource "cloudflare_access_policy" "onp_admin_proxmox" {
     github {
       name                 = local.github_org_name
       teams = [github_team.admin_team.slug]
-      identity_provider_id = cloudflare_access_identity_provider.github_oauth.id
+      identity_provider_id = cloudflare_access_identity_provider.github_sso.id
     }
   }
 }
