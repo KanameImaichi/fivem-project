@@ -35,9 +35,7 @@ provider "google-beta" {
   project = var.project_id
 }
 
-# provider "cloudflare" {
-#
-# }
+provider "cloudflare" {}
 
 # https://docs.github.com/ja/actions/security-guides/automatic-token-authentication
 provider "github" {
