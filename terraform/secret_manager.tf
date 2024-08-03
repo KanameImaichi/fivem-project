@@ -1,6 +1,6 @@
 resource "google_secret_manager_secret" "cloudflare_sso_github_client_id" {
   project   = var.project_id
-  secret_id = "cloudflare_sso_github_client_secret"
+  secret_id = "cloudflare_sso_github_client_id"
 
   replication {
     automatic = true
