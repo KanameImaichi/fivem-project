@@ -12,7 +12,7 @@ jobs:
     name: tf apply
     runs-on: ubuntu-latest
     permissions:
-      contents: "read"
+      contents: "write"
       id-token: "write"
     concurrency: tf_apply_on_main
 
