@@ -9,9 +9,6 @@ jobs:
   tf_apply:
     name: tf apply
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
     concurrency: tf_apply_on_main
 
@@ -21,13 +18,13 @@ jobs:
         with:
           terraform_version: 1.2.1
 
-      - name: Open tunnel to OnP k8s cluster
-        run: bash "./.github/workflows/scripts/open-tunnel-to-onp-k8s-and-export-tf-var-to-github-env.sh"
-
-      - name: Expose all Terraform variables to environment variables from secrets
-        run: bash "./.github/workflows/scripts/expose-all-tf-vars-to-github-env.sh"
-        env:
-          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+      #      - name: Open tunnel to OnP k8s cluster
+      #        run: bash "./.github/workflows/scripts/open-tunnel-to-onp-k8s-and-export-tf-var-to-github-env.sh"
+      #
+      #      - name: Expose all Terraform variables to environment variables from secrets
+      #        run: bash "./.github/workflows/scripts/expose-all-tf-vars-to-github-env.sh"
+      #        env:
+      #          SECRETS_CONTEXT: ${{ toJson(secrets) }}
 
       - run: terraform init
         working-directory: "./terraform"
