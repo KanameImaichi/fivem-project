@@ -25,6 +25,15 @@ variable "repository_name" {
   default = "fivem-serverlist"
 }
 
+variable "repository_organization_name_infra" {
+  type    = string
+  default = "CommetDevTeam"
+}
+
+variable "repository_name_infra" {
+  type    = string
+  default = "test"
+}
 
 variable "iam_roles" {
   type = list(string)

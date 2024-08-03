@@ -51,7 +51,7 @@ resource "google_iam_workload_identity_pool_provider" "github_actions_infra" {
   display_name                       = "github-actions-provider-infra"
   project                            = var.project_id
   attribute_condition                = <<-EOT
-  attribute.repository == "${var.repository_organization_name}/${var.repository_name}"
+  attribute.repository == "${var.repository_organization_name_infra}/${var.repository_name_infra}"
   EOT
   attribute_mapping = {
     "google.subject"       = "assertion.sub"
@@ -68,5 +68,5 @@ resource "google_iam_workload_identity_pool_provider" "github_actions_infra" {
 resource "google_service_account_iam_member" "workload_identity_account_iam_infra" {
   service_account_id = google_service_account.github_actions.name
   role               = "roles/iam.workloadIdentityUser"
-  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github_actions_infra.name}/attribute.repository/${var.repository_organization_name}/${var.repository_name}"
+  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github_actions_infra.name}/attribute.repository/${var.repository_organization_name_infra}/${var.repository_name_infra}"
 }
