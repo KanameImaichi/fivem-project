@@ -25,3 +25,18 @@ resource "google_project_iam_member" "github_actions" {
   role    = each.value
   member  = "serviceAccount:${google_service_account.github_actions.email}"
 }
+
+resource "google_service_account" "github_actions_terraform" {
+  project      = var.project_id
+  account_id   = "github-actions-builder"
+  display_name = "github-actions-builder"
+}
+
+# Add roles to the service account.
+resource "google_project_iam_member" "github_actions_terraform" {
+  for_each = toset(var.github_actions_terraform_roles)
+
+  project = var.project_id
+  role    = each.value
+  member  = "serviceAccount:${google_service_account.github_actions.email}"
+}
