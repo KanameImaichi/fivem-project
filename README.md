@@ -79,3 +79,7 @@ stringData:
 kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-user}' | base64 -d; echo
 kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-password}' | base64 -d; echo
 ```
+
+# Special Thanks
+
+https://github.com/GiganticMinecraft/seichi_infra

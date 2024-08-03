@@ -4,7 +4,7 @@
 server:
   autoscaling:
     enabled: true
-    minReplicas: 2
+    minReplicas: 1
     maxReplicas: 5
     # -- Average CPU utilization percentage (to the requested resource) for the Argo CD server [HPA]
     targetCPUUtilizationPercentage: 90
@@ -27,49 +27,73 @@ configs:
     create: true
     application.instanceLabelKey: argocd.argoproj.io/instance
     kustomize.buildOptions: --load-restrictor LoadRestrictionsNone
-    resource.exclusions: |
-      - apiGroups:
-        - "velero.io"
-        kinds:
-        - Backup
-        clusters:
-        - "*"
-
+    ## Following settings are required when configuring SSO
+    dex.config: |
+      connectors:
+        - type: github
+          id: github
+          name: GitHub
+          config:
+            clientID: Ov23liepe7TE7nzF4cSI
+            clientSecret: $argocd-github-oauth-app-secret:ARGOCD_GITHUB_OAUTH_APP_SECRET 
+            orgs:
+            - name: CommetDevTeam
+      staticClients:
+        - id: argo-workflows-sso
+          name: Argo Workflow
+          redirectURIs:
+            - https://argo-workflows.onp-k8s.admin.seichi.click/oauth2/callback
+          secretEnv: ARGO_WORKFLOWS_SSO_CLIENT_SECRET
+    admin.enabled: false
+  rbac:
+    create: true
+    # policy.csv is an file containing user-defined RBAC policies and role definitions (optional).
+    # Policy rules are in the form:
+    #   p, subject, resource, action, object, effect
+    # Role definitions and bindings are in the form:
+    #   g, subject, inherited-subject
+    # See https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md for additional information.
+    policy.csv: |
+      g, CommetDevTeam:admin-team, role:admin
+    # policy.default is the name of the default role which Argo CD will falls back to, when
+    # authorizing API requests (optional). If omitted or empty, users may be still be able to login,
+    # but will see no apps, projects, etc...
+    policy.default: role:readonly
 controller:
-  enableStatefulSet: true
   resources:
-    limits:
-      cpu: 500m
-      memory: 1024Mi
     requests:
       cpu: 250m
       memory: 768Mi
-  pdb:
+  metrics:
     enabled: true
-    minAvailable: 1
-    maxUnavailable: 0
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: prometheus
 
 dex:
   resources:
-    limits:
-      cpu: 100m
-      memory: 192Mi
     requests:
       cpu: 50m
       memory: 128Mi
-  pdb:
+  metrics:
     enabled: true
-    minAvailable: 1
-    maxUnavailable: 0
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: prometheus
 
 redis:
   resources:
-    limits:
-      cpu: 200m
-      memory: 256Mi
     requests:
       cpu: 100m
       memory: 128Mi
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: prometheus
 
 repoServer:
   replicaCount: 1
@@ -77,6 +101,12 @@ repoServer:
     requests:
       cpu: 500m
       memory: 128Mi
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: prometheus
 
 applicationSet:
   replicaCount: 1
@@ -84,12 +114,21 @@ applicationSet:
     requests:
       cpu: 500m
       memory: 128Mi
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: prometheus
 
 notifications:
   resources:
-    limits:
-      cpu: 100m
-      memory: 64Mi
     requests:
       cpu: 100m
       memory: 64Mi
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: prometheus

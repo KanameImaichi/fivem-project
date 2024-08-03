@@ -1,0 +1,37 @@
+name: Terraform apply
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+
+jobs:
+  tf_apply:
+    name: tf apply
+    runs-on: ubuntu-latest
+
+    concurrency: tf_apply_on_main
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.2.1
+
+      - name: Open tunnel to OnP k8s cluster
+        run: bash "./.github/workflows/scripts/open-tunnel-to-onp-k8s-and-export-tf-var-to-github-env.sh"
+
+      - name: Expose all Terraform variables to environment variables from secrets
+        run: bash "./.github/workflows/scripts/expose-all-tf-vars-to-github-env.sh"
+        env:
+          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+
+      - run: terraform init
+        working-directory: "./terraform"
+
+      - name: Terraform apply
+        run: terraform apply -input=false -no-color -auto-approve -lock-timeout=10m
+        working-directory: "./terraform"
+        env:
+          TF_VAR_cloudflare_api_key: ${{ secrets.TF_VAR_CLOUDFLARE_API_KEY }}
+          TF_VAR_cloudflare_email: ${{ secrets.TF_VAR_CLOUDFLARE_EMAIL }}
