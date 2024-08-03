@@ -36,12 +36,6 @@ data "google_secret_manager_secret_version" "cloudflare_sso_github_client_secret
   version = "latest"
 }
 
-
-data "google_secret_manager_secret_version" "cloudflare_sso_github_client_secret" {
-  secret  = google_secret_manager_secret.cloudflare_sso_github_client_secret.id
-  version = "latest"
-}
-
 # シークレットの値をローカル変数に格納
 locals {
   cloudflare_sso_github_client_id = jsondecode(data.google_secret_manager_secret_version.cloudflare_sso_github_client_id.secret_data)
