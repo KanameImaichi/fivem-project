@@ -26,9 +26,9 @@ spec:
           # 自己署名証明書で保護されているため、 noTLSVerify で無視する。
 
           # 本番クラスタ向け
-          - name: proxmox
-            external-hostname: proxmox.onp.admin.commet.jp
-            internal-authority: 10.123.0.154:8006
+  #          - name: proxmox
+  #            external-hostname: proxmox.onp.admin.commet.jp
+  #            internal-authority: 10.123.0.154:8006
 
   template:
     metadata:
