@@ -14,13 +14,13 @@ prerequisite_resources="$(cat <<EOF
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cluster-wide-apps
+  name: cloudflared-tunnel-exits
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: cloudflared-tunnel-credential
-  namespace: cluster-wide-apps
+  namespace: cloudflared-tunnel-exits
 type: Opaque
 data:
   TUNNEL_CREDENTIAL: "$(echo "${cloudflare_cert_pem}" | base64 -w 0 -)"
