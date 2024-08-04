@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: cloudflared-k8s-endpoint-configmap
-  namespace: cloudflared-tunnel-http-exits
+  namespace: cloudflared-tunnel-exits
 data:
   tunnel-config.yml: |
     ingress:
@@ -22,7 +22,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cloudflared-k8s-endpoint
-  namespace: cloudflared-tunnel-http-exits
+  namespace: cloudflared-tunnel-exits
   annotations:
     reloader.stakater.com/auto: "true"
   labels:
