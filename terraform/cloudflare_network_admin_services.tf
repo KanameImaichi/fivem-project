@@ -34,7 +34,7 @@ resource "cloudflare_access_policy" "onp_admin_proxmox" {
   include {
     github {
       name                 = local.github_org_name
-      teams = [github_team.admin_team.slug]
+      teams = ["admin-team"]
       identity_provider_id = cloudflare_access_identity_provider.github_sso.id
     }
   }
