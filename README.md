@@ -1,6 +1,6 @@
 # 作業手順
 
-## 作成
+## ProxmoxでのVMの作成
 
 ```shell
 bash ./deploy-vm.sh
@@ -12,6 +12,18 @@ bash ./deploy-vm.sh
 
 - [k8s-servers-wk-with-ssh]
 - [k8s-servers]
+
+## セットアップ
+
+1. k8s API endpoint へのインターネットからの経路を確立するために、 cloudflared-tunnel-credential Secret を作成します。
+
+    ```bash
+    /bin/bash <(curl -s "https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-proxmox/deploy-k8s-api-cloudflared-resources-to-cp-1.sh") "main"
+    ```
+
+   ```bash
+   ssh seichi-onp-k8s-cp-1 "cat ~/.kube/config" 
+   ```
 
 ## ArgoCD
 
