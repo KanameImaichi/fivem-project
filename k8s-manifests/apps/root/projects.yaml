@@ -34,6 +34,8 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: 'mariadb-operator'
       server: https://kubernetes.default.svc
+    - namespace: 'cloudflared-tunnel-exits'
+      server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
@@ -68,6 +70,26 @@ spec:
     - '*'
   destinations:
     - namespace: server-list
+      server: https://kubernetes.default.svc
+    # Application 及び ApplicationSet リソースは
+    # argocd namespace に置かないとArgoCDに認識されないため、
+    # argocd namespace へのデプロイも許可する。
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: cloudflared-tunnel-exits
+  namespace: argocd
+spec:
+  sourceRepos:
+    - '*'
+  destinations:
+    - namespace: cloudflared-tunnel-exits
       server: https://kubernetes.default.svc
     # Application 及び ApplicationSet リソースは
     # argocd namespace に置かないとArgoCDに認識されないため、
