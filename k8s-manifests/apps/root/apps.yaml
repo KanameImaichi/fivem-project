@@ -158,7 +158,7 @@ spec:
   source:
     repoURL: https://github.com/KanameImaichi/fivem-project
     targetRevision: main
-    path: proxmox-k8s/k8s-manifest/apps/cloudflared-tunnel-exits
+    path: proxmox-k8s/k8s-manifests/apps/cloudflared-tunnel-exits
   destination:
     server: https://kubernetes.default.svc
     namespace: "cloudflared-tunnel-exits"
