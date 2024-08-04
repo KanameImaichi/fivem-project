@@ -39,7 +39,7 @@ spec:
       source:
         repoURL: https://github.com/KanameImaichi/fivem-project
         targetRevision: "main"
-        path: proxmox-k8s/k8s-manifests/app-templates/cloudflared-tunnel
+        path: k8s-manifests/app-templates/cloudflared-tunnel
         helm:
           # サービス一つに対してトンネルを一つずつ生やす
           releaseName: cloudflared-tunnel-https-exit--{{name}}
