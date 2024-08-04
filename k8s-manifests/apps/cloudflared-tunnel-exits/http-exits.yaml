@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cloudflared-tunnel-https-exits
+  name: cloudflared-tunnel-http-exits
   namespace: argocd
 spec:
   generators:
@@ -17,7 +17,7 @@ spec:
           # ArgoCD
           - name: argocd
             external-hostname: argocd.onp-k8s.admin.commet.jp
-            internal-authority: argocd-server.argocd:443
+            internal-authority: argocd-server.argocd
           # 管理者からの直アクセスを想定するため、GitHub TeamsによるSSOを設定している
           # (terraform/cloudflare_network_admin_services.yaml 参照)
           #
@@ -32,7 +32,7 @@ spec:
 
   template:
     metadata:
-      name: "cloudflared-tunnel-https-exit--{{name}}"
+      name: "cloudflared-tunnel-http-exit--{{name}}"
       namespace: argocd
     spec:
       project: cloudflared-tunnel-exits
@@ -50,7 +50,7 @@ spec:
             tunnelConfigContent: |
               ingress:
                 - hostname: {{external-hostname}}
-                  service: "https://{{internal-authority}}"
+                  service: "http://{{internal-authority}}"
                   originRequest:
                     noTLSVerify: true
                 # Catch-all service

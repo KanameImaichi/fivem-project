@@ -28,6 +28,8 @@ configs:
     application.instanceLabelKey: argocd.argoproj.io/instance
     kustomize.buildOptions: --load-restrictor LoadRestrictionsNone
     ## Following settings are required when configuring SSO
+    # Argo CD's externally facing base URL (optional).
+    url: http://argocd.onp-k8s.admin.commet.jp
     dex.config: |
       connectors:
         - type: github
@@ -38,12 +40,6 @@ configs:
             clientSecret: $argocd-github-oauth-app-secret:ARGOCD_GITHUB_OAUTH_APP_SECRET 
             orgs:
             - name: CommetDevTeam
-      staticClients:
-        - id: argo-workflows-sso
-          name: Argo Workflow
-          redirectURIs:
-            - https://argo-workflows.onp-k8s.admin.seichi.click/oauth2/callback
-          secretEnv: ARGO_WORKFLOWS_SSO_CLIENT_SECRET
     admin.enabled: false
   rbac:
     create: true
@@ -59,6 +55,8 @@ configs:
     # authorizing API requests (optional). If omitted or empty, users may be still be able to login,
     # but will see no apps, projects, etc...
     policy.default: role:readonly
+  params:
+    server.insecure: true
 controller:
   resources:
     requests:
