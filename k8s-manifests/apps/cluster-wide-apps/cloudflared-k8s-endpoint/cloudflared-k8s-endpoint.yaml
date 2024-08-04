@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared-k8s-endpoint-configmap
+  namespace: cluster-wide-apps
+data:
+  tunnel-config.yml: |
+    ingress:
+      # このホストはDoS攻撃を防ぐために、サービストークン等による保護を行うべき。
+      # 
+      # 2022/05/22 NOTE: サービストークンは1年に1度手動入れ替えをする必要があるが、
+      # 影響範囲がCIに閉じている上に、もし止まっても、
+      # Secretの更新ができなかったりArgoCDのバージョンが上がらない程度の
+      # 影響しかないと見込めるため、当面はこのような運用で問題は生じないと判断した。
+      - hostname: k8s-api.onp-k8s.admin.seichi.click
+        # APIエンドポイントはクライアント証明書による認証を行うので、tcpトンネルを張る。
+        service: tcp://kubernetes.default:443
+
+      - service: http_status:404
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflared-k8s-endpoint
+  namespace: cluster-wide-apps
+  annotations:
+    reloader.stakater.com/auto: "true"
+  labels:
+    app: cloudflared-k8s-endpoint
+    appgroup: cloudflared-k8s-endpoint
+    env: cluster-wide
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudflared-k8s-endpoint
+      appgroup: cloudflared-k8s-endpoint
+      env: cluster-wide
+  template:
+    metadata:
+      labels:
+        app: cloudflared-k8s-endpoint
+        appgroup: cloudflared-k8s-endpoint
+        env: cluster-wide
+    spec:
+      containers:
+        - name: cloudflared-k8s-endpoint
+          image: "ghcr.io/giganticminecraft/cloudflared-with-auto-dns-route:2024.6.1"
+          env:
+            - name: TUNNEL_NAME
+              value: "onp-kubernetes-api-endpoint-tunnel"
+            # cloudflared tunnel が実行された時、 cloudflared は Tunnel credential を
+            # $TUNNEL_CRED_FILE に書き込む。
+            # また、tunnel origin certificate は k8s の Secret によって提供されるため、
+            # どこかにread-onlyでマウントする必要がある。
+            # そのため、 TUNNEL_ORIGIN_FILE を TUNNEL_ORIGIN_CERT のマウントパス外に
+            # 設定する必要がある
+            - name: TUNNEL_ORIGIN_CERT
+              value: "/root/.cloudflared-origin-cert/cert.pem"
+            - name: TUNNEL_CRED_FILE
+              value: "/root/.cloudflared/tunnel-cred.json"
+          volumeMounts:
+            - mountPath: "/root/.cloudflared-origin-cert"
+              name: cloudflared-k8s-endpoint-authorization-certificate
+            - mountPath: "/etc/cloudflared"
+              name: cloudflared-k8s-endpoint-config
+          resources:
+            requests:
+              memory: 32Mi
+            limits:
+              memory: 64Mi
+      volumes:
+        - name: cloudflared-k8s-endpoint-authorization-certificate
+          secret:
+            # このシークレットはクラスタセットアップ作業手順により注入されているべき。
+            secretName: cloudflared-tunnel-credential
+            items:
+              - key: TUNNEL_CREDENTIAL
+                path: cert.pem
+        - name: cloudflared-k8s-endpoint-config
+          configMap:
+            name: cloudflared-k8s-endpoint-configmap
