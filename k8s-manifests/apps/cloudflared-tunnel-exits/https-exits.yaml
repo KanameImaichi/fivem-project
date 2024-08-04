@@ -16,7 +16,7 @@ spec:
         elements:
           # ArgoCD
           - name: argocd
-            external-hostname: argocd.onp-k8s.admin.seichi.click
+            external-hostname: argocd.onp-k8s.admin.commet.jp
             internal-authority: argocd-server.argocd:443
           # 管理者からの直アクセスを想定するため、GitHub TeamsによるSSOを設定している
           # (terraform/cloudflare_network_admin_services.yaml 参照)
@@ -27,7 +27,7 @@ spec:
 
           # 本番クラスタ向け
           - name: proxmox
-            external-hostname: proxmox.onp.admin.seichi.click
+            external-hostname: proxmox.onp.admin.commet.jp
             internal-authority: 10.123.0.154:8006
 
   template:
