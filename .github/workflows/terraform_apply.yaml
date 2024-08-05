@@ -4,7 +4,7 @@ on:
     branches:
       - "main"
     paths:
-      - "/terraform"
+      - "**.tf"
   workflow_dispatch:
 env:
   GCP_PROJECT_ID: commet-431413
