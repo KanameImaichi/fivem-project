@@ -16,7 +16,7 @@ spec:
         elements:
           # ArgoCD
           - name: argocd
-            external-hostname: argocd.onp-k8s.admin.commet.jp
+            external-hostname: argocd.commet.jp
             internal-authority: argocd-server.argocd
           # 管理者からの直アクセスを想定するため、GitHub TeamsによるSSOを設定している
           # (terraform/cloudflare_network_admin_services.yaml 参照)

@@ -29,7 +29,7 @@ configs:
     kustomize.buildOptions: --load-restrictor LoadRestrictionsNone
     ## Following settings are required when configuring SSO
     # Argo CD's externally facing base URL (optional).
-    url: http://argocd.onp-k8s.admin.commet.jp
+    url: http://argocd.commet.jp
     dex.config: |
       connectors:
         - type: github
