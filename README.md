@@ -22,7 +22,7 @@ bash ./deploy-vm.sh
     ```
 
    ```bash
-   ssh seichi-onp-k8s-cp-1 "cat ~/.kube/config" 
+   ssh 192.168.0.11 "cat ~/.kube/config" 
    ```
 
 ## ArgoCD
