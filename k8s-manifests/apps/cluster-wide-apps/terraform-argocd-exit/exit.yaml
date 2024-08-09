@@ -27,4 +27,4 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: cloudflare-secret
-                  key: cloudflare-api-token
+                  key: cloudflare-argocd-tunnel-token
