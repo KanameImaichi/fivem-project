@@ -20,7 +20,7 @@ metadata:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: cloudflared-tunnel-cert
+  name: c
   namespace: cluster-wide-apps
 type: Opaque
 data:
@@ -37,4 +37,4 @@ EOF
 "
 
 # shellcheck disable=SC2029 # ssh command expanded on client side is the expected behaviour
-ssh cloudinit@192.168.0.11 "kubectl apply -f \"${cloudflared_k8s_endpoint_manifest_url}\""
+#ssh cloudinit@192.168.0.11 "kubectl apply -f \"${cloudflared_k8s_endpoint_manifest_url}\""
