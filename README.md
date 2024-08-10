@@ -55,7 +55,7 @@ kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.pas
 ## Cloudflare Tunnel
 1. Cloudflaredに必要な tunnel certをsecretとして注入する。
 ```shell
-/bin/bash <(curl -s "https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-proxmox/deploy-cloudflared-resource.sh") "main"
+bash -c '/bin/bash <(curl -s "https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-proxmox/deploy-cloudflared-resource.sh") "main"'
 ```
 1. GitHub Actions で実行される terraform コマンドの実行に必要な `kubeconfig` を `seichi_infra` リポジトリの Actions secrets として設定します。
 
