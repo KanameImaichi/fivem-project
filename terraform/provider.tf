@@ -34,13 +34,7 @@ provider "google" {
 provider "google-beta" {
   project = var.project_id
 }
-# variable "cloudflare-api-token" {
-#   sensitive = true
-# }
-#
-# provider "cloudflare" {
-#   api_token = var.cloudflare-api-token
-# }
+
 provider "cloudflare" {}
 
 # https://docs.github.com/ja/actions/security-guides/automatic-token-authentication
