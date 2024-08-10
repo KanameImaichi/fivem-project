@@ -52,6 +52,17 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 ```shell
 kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
+## Cloudflare Tunnel
+1. Cloudflaredに必要な tunnel certをsecretとして注入する。
+```shell
+/bin/bash <(curl -s "https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-proxmox/deploy-cloudflared-resource.sh") "main"
+```
+1. GitHub Actions で実行される terraform コマンドの実行に必要な `kubeconfig` を `seichi_infra` リポジトリの Actions secrets として設定します。
+
+   https://github.com/KanameImaichi/fivem-project/settings/secrets/actions にアクセスし `Repository secrets > TF_VAR_ONP_K8S_KUBECONFIG` に下記コマンドの標準出力を注入してください。
+    ```bash
+    ssh seichi-onp-k8s-cp-1 "cat ~/.kube/config" 
+    ```
 
 # External Secret Operator
 

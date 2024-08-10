@@ -25,7 +25,12 @@ jobs:
           terraform_version: 1.9.3
 
       - name: Open tunnel to OnP k8s cluster
-        run: bash "./.github/workflows/scripts/open-tunnel-to-onp-k8s.sh"
+        run: bash "./.github/workflows/scripts/open-tunnel-to-onp-k8s-and-export-tf-var-to-github-env.sh"
+
+      - name: Expose all Terraform variables to environment variables from secrets
+        run: bash "./.github/workflows/scripts/expose-all-tf-vars-to-github-env.sh"
+        env:
+          SECRETS_CONTEXT: ${{ toJson(secrets) }}
       - name: loud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
