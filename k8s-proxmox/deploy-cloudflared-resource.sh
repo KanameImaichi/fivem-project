@@ -30,11 +30,11 @@ EOF
 # endregion
 
 # shellcheck disable=SC2029 # ssh command expanded on client side is the expected behaviour
-ssh 192.168.0.11 "
+ssh cloudinit@192.168.0.11 "
 cat <<EOF | kubectl apply -f -
 ${cloudflare_cert_secret}
 EOF
 "
 
 # shellcheck disable=SC2029 # ssh command expanded on client side is the expected behaviour
-ssh 192.168.0.11 "kubectl apply -f \"${cloudflared_k8s_endpoint_manifest_url}\""
+ssh cloudinit@192.168.0.11 "kubectl apply -f \"${cloudflared_k8s_endpoint_manifest_url}\""

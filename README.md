@@ -61,7 +61,7 @@ kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.pas
 
    https://github.com/KanameImaichi/fivem-project/settings/secrets/actions にアクセスし `Repository secrets > TF_VAR_ONP_K8S_KUBECONFIG` に下記コマンドの標準出力を注入してください。
     ```bash
-    ssh seichi-onp-k8s-cp-1 "cat ~/.kube/config" 
+    ssh cloudinit@192.168.0.11 "cat ~/.kube/config" 
     ```
 
 # External Secret Operator
