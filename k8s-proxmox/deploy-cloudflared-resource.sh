@@ -3,7 +3,7 @@
 # region manifest URLを生成する
 
 target_branch="$1"
-k8s_definition_base_url="https://https://raw.githubusercontent.com/KanameImaichi/fivem-project"
+k8s_definition_base_url="https://raw.githubusercontent.com/KanameImaichi/fivem-project/main"
 cloudflared_k8s_endpoint_manifest_url="${k8s_definition_base_url}/k8s-manifests/cluster-wide-app/cloudflared-k8s-endpoint/cloudflared-k8s-endpoint.yaml"
 
 # endregion
