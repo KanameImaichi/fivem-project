@@ -9,9 +9,9 @@ cloudflared_k8s_endpoint_manifest_url="${k8s_definition_base_url}/k8s-manifests/
 # endregion
 
 # region secret リソースの中身を生成する
-cloudflare_cert="$(/bin/bash <(curl -s "${k8s_definition_base_url}/k8s-proxmox/obtain-cloudflare-cert.sh") "${target_branch}")"
-echo "${cloudflare_cert}" | base64 -w 0 -
-cloudflare_cert_secret="$(cat <<EOF
+cloudflare_cert=$(curl -s "${k8s_definition_base_url}/k8s-proxmox/obtain-cloudflare-cert.sh" | bash -s "${target_branch}")
+encoded_cert=$(echo "${cloudflare_cert}" | base64 -w 0)
+cloudflare_cert_secret=$(cat <<EOF
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -24,14 +24,13 @@ metadata:
   namespace: cluster-wide-apps
 type: Opaque
 data:
-  TUNNEL_CERT: "$(echo "${cloudflare_cert}" | base64 -w 0 -)"
+  TUNNEL_CERT: "${encoded_cert}"
 EOF
-)"
+)
 # endregion
 
 # shellcheck disable=SC2029 # ssh command expanded on client side is the expected behaviour
-ssh cloudinit@192.168.0.11 "
-cat <<EOF | kubectl apply -f -
+ssh cloudinit@192.168.0.11 "cat <<EOF | kubectl apply -f -
 ${cloudflare_cert_secret}
 EOF
 "
