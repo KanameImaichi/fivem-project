@@ -16,26 +16,6 @@ locals {
   root_domain           = "commet.jp"
 }
 
-#region on-premise k8s access configuration
-
-# variable "onp_k8s_kubeconfig" {
-#   description = "On-premise cluster's kubeconfig.yaml content"
-#   type        = string
-#   sensitive   = true
-# }
-#
-# # オンプレクラスタの kubeconfig.yaml は、cluster CA certificate、client certificate、client keyをそれぞれ
-# #  - clusters[?].cluster.certificate-authority-data に
-# #  - users[?].user.client-certificate-data に
-# #  - users[?].user.client-key-data に
-# # base64で保持している。
-#
-# locals {
-#   onp_kubernetes_cluster_ca_certificate = base64decode(yamldecode(var.onp_k8s_kubeconfig).clusters[0].cluster.certificate-authority-data)
-#   onp_kubernetes_client_certificate = base64decode(yamldecode(var.onp_k8s_kubeconfig).users[0].user.client-certificate-data)
-#   onp_kubernetes_client_key = base64decode(yamldecode(var.onp_k8s_kubeconfig).users[0].user.client-key-data)
-# }
-
 variable "env" {
   type    = string
   default = "dev"
