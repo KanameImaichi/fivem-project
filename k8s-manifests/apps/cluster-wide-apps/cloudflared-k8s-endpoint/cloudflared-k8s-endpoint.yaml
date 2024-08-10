@@ -75,9 +75,9 @@ spec:
         - name: cloudflared-k8s-endpoint-authorization-certificate
           secret:
             # このシークレットはクラスタセットアップ作業手順により注入されているべき。
-            secretName: cloudflared-tunnel-credential
+            secretName: cloudflared-tunnel-cert
             items:
-              - key: TUNNEL_CREDENTIAL
+              - key: TUNNEL_CERT
                 path: cert.pem
         - name: cloudflared-k8s-endpoint-config
           configMap:
