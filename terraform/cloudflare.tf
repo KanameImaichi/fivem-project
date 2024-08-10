@@ -12,8 +12,8 @@ resource "cloudflare_tunnel" "auto_tunnel" {
 # Creates the CNAME record that routes http_app.${var.cloudflare_zone} to the tunnel.
 resource "cloudflare_record" "http_app" {
   zone_id = local.cloudflare_zone_id
-  name    = "http_app"
-  value   = cloudflare_tunnel.auto_tunnel.cname
+  name    = "argocd"
+  content   = cloudflare_tunnel.auto_tunnel.cname
   type    = "CNAME"
   proxied = true
 }
@@ -25,7 +25,7 @@ resource "cloudflare_tunnel_config" "auto_tunnel" {
   config {
     ingress_rule {
       hostname = cloudflare_record.http_app.hostname
-      service  = "argocd-server.argocd"
+      service  = "https://192.168.0.11:30277"
     }
     ingress_rule {
       service = "http_status:404"
@@ -65,11 +65,14 @@ resource "cloudflare_access_policy" "onp_admin_proxmox" {
   precedence     = "1"
   decision       = "allow"
 
+#   include {
+#     github {
+#       name                 = local.github_org_name
+#       teams = ["admin-team"]
+#       identity_provider_id = cloudflare_access_identity_provider.github_sso.id
+#     }
+#   }
   include {
-    github {
-      name                 = local.github_org_name
-      teams = ["admin-team"]
-      identity_provider_id = cloudflare_access_identity_provider.github_sso.id
-    }
+    email = ["kaname.imaichi@gmail.com"]
   }
 }

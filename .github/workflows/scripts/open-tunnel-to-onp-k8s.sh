@@ -5,11 +5,11 @@ set -eu
 # トンネルが可視となる URL を標準出力に出力するスクリプト。
 
 # トンネル自体のホスト名
-tunnel_host="k8s-api.onp-k8s.admin.seichi.click"
+tunnel_host="k8s-api.onp-k8s.admin.commet.jp"
 
 # トンネルが可視となるホスト名。
 # /terraform/cloudflare_dns_records.tf により、127.0.0.1 に向けられている。
-tunnel_entry_host="k8s-api.onp-k8s.admin.local-tunnels.seichi.click"
+tunnel_entry_host="k8s-api.onp-k8s.admin.local-tunnels.commet.jp"
 
 function echo_to_err () {
   echo "$1" >&2;

@@ -19,9 +19,20 @@ resource "google_secret_manager_secret" "cloudflare_sso_github_client_secret" {
     automatic = true
   }
 }
-
-
 data "google_secret_manager_secret_version" "cloudflare_sso_github_client_secret" {
   secret  = google_secret_manager_secret.cloudflare_sso_github_client_secret.id
   version = "latest"
+}
+
+resource "kubernetes_secret" "cloudflare_argocd_tunnel_token" {
+  metadata {
+    name      = "cloudflare-secret"
+    namespace = "argocd"
+  }
+
+  data = {
+    "cloudflare-argocd-tunnel-token"     = cloudflare_tunnel.auto_tunnel.tunnel_token
+  }
+
+  type = "Opaque"
 }

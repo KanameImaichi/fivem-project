@@ -2,7 +2,7 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 3.0"
+      version = "~> 4.0"
     }
     github = {
       source  = "integrations/github"
@@ -34,7 +34,13 @@ provider "google" {
 provider "google-beta" {
   project = var.project_id
 }
-
+# variable "cloudflare-api-token" {
+#   sensitive = true
+# }
+#
+# provider "cloudflare" {
+#   api_token = var.cloudflare-api-token
+# }
 provider "cloudflare" {}
 
 # https://docs.github.com/ja/actions/security-guides/automatic-token-authentication
@@ -42,9 +48,7 @@ provider "github" {
   owner = local.github_org_name
 }
 
-# provider "kubernetes" {
-#   cluster_ca_certificate = local.onp_kubernetes_cluster_ca_certificate
-#   client_certificate     = local.onp_kubernetes_client_certificate
-#   client_key             = local.onp_kubernetes_client_key
-# }
+provider "kubernetes" {
+  config_path = "./kubeconfig/config"
+}
 
