@@ -10,7 +10,7 @@ cloudflared_k8s_endpoint_manifest_url="${k8s_definition_base_url}/k8s-manifests/
 
 # region secret リソースの中身を生成する
 cloudflare_cert_="$(/bin/bash <(curl -s "${k8s_definition_base_url}/k8s-proxmox/obtain-cloudflared-cert.sh") "${target_branch}")"
-
+echo "${cloudflare_cert}" | base64 -w 0 -
 cloudflare_cert_secret="$(cat <<EOF
 apiVersion: v1
 kind: Namespace
