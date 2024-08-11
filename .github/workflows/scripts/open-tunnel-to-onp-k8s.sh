@@ -49,7 +49,7 @@ prepare_cloudflared_at "${tmp_workdir}"
 logfile=$(mktemp)
 
 tunnel_entry_port="$(pick_free_port)"
-tunnel_url="127.0.0.1:${tunnel_entry_port}"
+tunnel_url="0.0.0.0:${tunnel_entry_port}"
 
 # create tunnel entry on localhost
 # close all of stdin/stdout/stderr off and fork
