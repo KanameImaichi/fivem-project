@@ -36,7 +36,7 @@ resource "cloudflare_tunnel_config" "auto_tunnel" {
 resource "cloudflare_access_application" "onp_admin_proxmox" {
   zone_id          = local.cloudflare_zone_id
   name             = "Proxmox administration"
-  domain           = "argocd.${local.root_domain}"
+  domain           = "proxmox.onp.admin.${local.root_domain}"
   type             = "self_hosted"
   session_duration = "24h"
 

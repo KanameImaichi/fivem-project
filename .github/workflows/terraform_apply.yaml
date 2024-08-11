@@ -5,6 +5,7 @@ on:
       - "main"
     paths:
       - "**.tf"
+      - ".github"
   workflow_dispatch:
 env:
   GCP_PROJECT_ID: commet-431413
@@ -26,9 +27,8 @@ jobs:
 
       - name: Open tunnel to OnP k8s cluster
         run: bash "./.github/workflows/scripts/open-tunnel-to-onp-k8s-and-export-tf-var-to-github-env.sh"
-      - name: Ping
-        run: ping 192.168.0.1:10000
-
+      - name: host
+        run: host k8s-api.onp-k8s.admin.local-tunnels.commet.jp
       - name: Expose all Terraform variables to environment variables from secrets
         run: bash "./.github/workflows/scripts/expose-all-tf-vars-to-github-env.sh"
         env:
