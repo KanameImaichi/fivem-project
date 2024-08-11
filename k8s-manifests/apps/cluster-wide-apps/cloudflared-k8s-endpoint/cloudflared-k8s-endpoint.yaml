@@ -82,3 +82,7 @@ spec:
         - name: cloudflared-k8s-endpoint-config
           configMap:
             name: cloudflared-k8s-endpoint-configmap
+      securityContext:
+        sysctls:
+          - name: net.core.rmem_default
+            value: "26214400"
