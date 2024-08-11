@@ -45,11 +45,13 @@ spec:
         appgroup: cloudflared-k8s-endpoint
         env: cluster-wide
     spec:
+      securityContext:
+        sysctls:
+          - name: net.core.rmem_max
+            value: "7500000"
       containers:
         - name: cloudflared-k8s-endpoint
           image: "ghcr.io/giganticminecraft/cloudflared-with-auto-dns-route:2024.6.1"
-          command:
-            - sysctl -w net.core.rmem_max=7500000
           env:
             - name: TUNNEL_NAME
               value: "onp-kubernetes-api-endpoint-tunnel"
