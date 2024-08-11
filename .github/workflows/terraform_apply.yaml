@@ -6,6 +6,7 @@ on:
     paths:
       - "**.tf"
       - ".github/workflows/*.yaml"
+      - ".github/workflows/*.sh"
   workflow_dispatch:
 env:
   GCP_PROJECT_ID: commet-431413
