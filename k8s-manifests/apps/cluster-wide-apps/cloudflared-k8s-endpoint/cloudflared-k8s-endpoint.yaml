@@ -48,6 +48,8 @@ spec:
       containers:
         - name: cloudflared-k8s-endpoint
           image: "ghcr.io/giganticminecraft/cloudflared-with-auto-dns-route:2024.6.1"
+          command:
+            - sysctl -w net.core.rmem_default=26214400
           env:
             - name: TUNNEL_NAME
               value: "onp-kubernetes-api-endpoint-tunnel"
