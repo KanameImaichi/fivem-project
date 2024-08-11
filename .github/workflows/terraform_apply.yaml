@@ -27,6 +27,8 @@ jobs:
 
       - name: Open tunnel to OnP k8s cluster
         run: bash "./.github/workflows/scripts/open-tunnel-to-onp-k8s-and-export-tf-var-to-github-env.sh"
+      - name: lsof
+        run: lsof -i:10000
       - name: host
         run: ping k8s-api.onp-k8s.admin.local-tunnels.commet.jp:10000
       - name: Expose all Terraform variables to environment variables from secrets
