@@ -64,7 +64,6 @@ function download_and_print_cert_pem () {
   else
     cat "${cert_pem_downloaded_location}"
     echo "${cert_pem_downloaded_location}"
-    rm "${cert_pem_downloaded_location}"
     return 0
   fi
 }
