@@ -28,7 +28,7 @@ spec:
 
           # 本番クラスタ向け
           - name: proxmox
-            external-hostname: proxmox.onp.admin.commet.jp
+            external-hostname: proxmox.commet.jp
             internal-authority: 192.168.0.85:8006
 
   template:
