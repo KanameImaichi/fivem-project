@@ -17,7 +17,7 @@ spec:
           # ArgoCD
           - name: argocd
             external-hostname: argocd.commet.jp
-            internal-authority: http://argocd-server.argocd.svc.cluster.local:80
+            internal-authority: argocd-server.argocd.svc.cluster.local:80
 
           # 管理者からの直アクセスを想定するため、GitHub TeamsによるSSOを設定している
           # (terraform/cloudflare_network_admin_services.yaml 参照)
