@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: arc-controller
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+spec:
+  project: cluster-wide-apps
+  source:
+    chart: actions-runner-controller
+    repoURL: https://actions-runner-controller.github.io/actions-runner-controller
+    targetRevision: 0.23.7
+    helm:
+      releaseName:
+      values: |
+        githubWebhookServer:
+          enabled: false
+        certManagerEnabled: true
+        scope:
+          singleNamespace: false
+        authSecret:
+          enabled: true
+        env:
+          - name: GITHUB_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: github_token
+                name: controller-manager        
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: server-list
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true
+      #      https://github.com/actions/actions-runner-controller/issues/2565
