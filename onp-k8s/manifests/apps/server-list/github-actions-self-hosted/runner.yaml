@@ -7,5 +7,5 @@ spec:
   replicas: 1
   template:
     spec:
-      organization: KanameImaichi
+      repository: CommetDevTeam/commet_infra
 

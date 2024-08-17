@@ -35,12 +35,12 @@ variable "repository_name" {
 
 variable "repository_organization_name_infra" {
   type    = string
-  default = "KanameImaichi"
+  default = "CommetDevTeam"
 }
 
 variable "repository_name_infra" {
   type    = string
-  default = "fivem-project"
+  default = "commet_infra"
 }
 
 variable "iam_roles" {

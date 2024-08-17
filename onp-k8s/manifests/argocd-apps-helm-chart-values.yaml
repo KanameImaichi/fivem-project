@@ -6,7 +6,7 @@ applications:
     namespace: argocd
     project: argocd-root
     source:
-      repoURL: https://github.com/KanameImaichi/fivem-project
+      repoURL: https://github.com/CommetDevTeam/commet_infra
       targetRevision: main
       path: onp-k8s/manifests/apps/root
     destination:

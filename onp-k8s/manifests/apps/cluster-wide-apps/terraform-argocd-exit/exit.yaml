@@ -46,7 +46,7 @@ spec:
           releaseName: cloudflared-tunnel-https-exit--{{name}}
           values: |
             installationName: {{name}}
-            tunnelNamePrefix: "seichi-onp-k8s--https--"
+            tunnelNamePrefix: "commet-onp-k8s--https--"
             tunnelCredentialSecretName: "cloudflared-tunnel-cert"
             tunnelConfigContent: |
               ingress:

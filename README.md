@@ -13,12 +13,18 @@ bash ./deploy-vm.sh
 - [k8s-servers-wk-with-ssh]
 - [k8s-servers]
 
+## Secretの作成
+
+github self hosted 用のgithub token
+使用する権限は以下を参照
+https://github.com/actions/actions-runner-controller/issues/84
+
 ## セットアップ
 
 1. k8s API endpoint へのインターネットからの経路を確立するために、 cloudflared-tunnel-credential Secret を作成します。
 
     ```bash
-    /bin/bash <(curl -s "https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-proxmox/deploy-k8s-api-cloudflared-resources-to-cp-1.sh") "main"
+    /bin/bash <(curl -s "https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/onp-k8s/cluster-boot-up/scripts/local-terminal/deploy-k8s-api-cloudflared-resources-to-cp-1.sh") "main"
     ```
 
    ```bash
@@ -55,17 +61,22 @@ kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.pas
 ## Cloudflare Tunnel
 1. Cloudflaredに必要な tunnel certをsecretとして注入する。
 ```shell
-bash -c '/bin/bash <(curl -s "https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-proxmox/deploy-cloudflared-resource.sh") "main"'
+/bin/bash <(curl -s "https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/onp-k8s/cluster-boot-up/scripts/local-terminal/deploy-cloudflared-resource.sh") "main"
 ```
 1. GitHub Actions で実行される terraform コマンドの実行に必要な `kubeconfig` を `seichi_infra` リポジトリの Actions secrets として設定します。
 
-   https://github.com/KanameImaichi/fivem-project/settings/secrets/actions にアクセスし `Repository secrets > TF_VAR_ONP_K8S_KUBECONFIG` に下記コマンドの標準出力を注入してください。
+   https://github.com/CommetDevTeam/commet_infra/settings/secrets/actions にアクセスし `Repository secrets > TF_VAR_ONP_K8S_KUBECONFIG` に下記コマンドの標準出力を注入してください。
     ```bash
     ssh cloudinit@192.168.0.11 "cat ~/.kube/config" 
     ```
+./kukbeconfig
+./cloudflared cert.pem
+
+/bin/bash <(curl -s "https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/onp-k8s/cluster-boot-up/scripts/local-terminal/obtain-cloudflare-cert.sh") "main"
+kubectl create secret generic -n cloudflared-tunnel-exits cloudflared-tunnel-cert --from-file=TUNNEL_CREDENTIAL=${HOME}/.cloudflared/cert.pem
 
 # External Secret Operator
-
+/bin/bash <(curl -s "https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/onp-k8s/cluster-boot-up/scripts/local-terminal/obtain-cloudflare-cert.sh") "main"
 GCPのSecretManagerでGithub Actions Self Hosted などのSecretの管理取得を行っている。
 サービスアカウントキーを使用してGCPへの認証を行うためSecretを追加する。
 

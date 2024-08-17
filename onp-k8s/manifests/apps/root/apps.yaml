@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/CommetDevTeam/commet_infra
         revision: main
         directories:
           - path: onp-k8s/manifests/apps/cluster-wide-apps/*
@@ -18,7 +18,7 @@ spec:
     spec:
       project: cluster-wide-apps
       source:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/CommetDevTeam/commet_infra
         targetRevision: main
         path: "{{path}}"
       destination:
@@ -48,7 +48,7 @@ metadata:
 spec:
   project: argocd-root
   source:
-    repoURL: https://github.com/KanameImaichi/fivem-project
+    repoURL: https://github.com/CommetDevTeam/commet_infra
     targetRevision: main
     path: onp-k8s/manifests/apps/cluster-wide-app-resources
   destination:
@@ -76,7 +76,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/CommetDevTeam/commet_infra
         revision: main
         directories:
           - path: onp-k8s/manifests/apps/fivem/*
@@ -88,7 +88,7 @@ spec:
     spec:
       project: fivem
       source:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/CommetDevTeam/commet_infra
         targetRevision: main
         path: "{{path}}"
       destination:
@@ -116,7 +116,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/CommetDevTeam/commet_infra
         revision: main
         directories:
           - path: onp-k8s/manifests/apps/server-list/*
@@ -128,7 +128,7 @@ spec:
     spec:
       project: server-list
       source:
-        repoURL: https://github.com/KanameImaichi/fivem-project
+        repoURL: https://github.com/CommetDevTeam/commet_infra
         targetRevision: main
         path: "{{path}}"
       destination:
@@ -156,7 +156,7 @@ metadata:
 spec:
   project: cloudflared-tunnel-exits
   source:
-    repoURL: https://github.com/KanameImaichi/fivem-project
+    repoURL: https://github.com/CommetDevTeam/commet_infra
     targetRevision: main
     path: onp-k8s/manifests/apps/cloudflared-tunnel-exits
   destination:

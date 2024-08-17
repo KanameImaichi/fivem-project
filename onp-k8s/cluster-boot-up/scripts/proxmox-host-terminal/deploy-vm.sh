@@ -8,7 +8,7 @@ TEMPLATE_BOOT_IMAGE_TARGET_VOLUME=local-lvm
 BOOT_IMAGE_TARGET_VOLUME=local-lvm
 SNIPPET_TARGET_VOLUME=local
 SNIPPET_TARGET_PATH=/var/lib/vz/snippets
-REPOSITORY_RAW_SOURCE_URL="https://raw.githubusercontent.com/KanameImaichi/fivem-project/main"
+REPOSITORY_RAW_SOURCE_URL="https://raw.githubusercontent.com/CommetDevTeam/commet_infra/main"
 TARGET_BRANCH="main"
 VM_LIST=(
     # ---
