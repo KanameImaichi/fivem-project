@@ -4,7 +4,7 @@
 
 target_branch="$1"
 k8s_definition_base_url="https://raw.githubusercontent.com/KanameImaichi/fivem-project/main"
-cloudflared_k8s_endpoint_manifest_url="${k8s_definition_base_url}/k8s-manifests/cluster-wide-app/cloudflared-k8s-endpoint/cloudflared-k8s-endpoint.yaml"
+cloudflared_k8s_endpoint_manifest_url="${k8s_definition_base_url}/onp-k8s/manifests/cluster-wide-app/cloudflared-k8s-endpoint/cloudflared-k8s-endpoint.yaml"
 
 # endregion
 

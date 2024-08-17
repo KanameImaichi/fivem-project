@@ -133,7 +133,7 @@ runcmd:
   - su - cloudinit -c "curl -sS https://github.com/KanameImaichi.keys >> ~/.ssh/authorized_keys"
   - su - cloudinit -c "chmod 600 ~/.ssh/authorized_keys"
   # run install scripts
-  - su - cloudinit -c "curl -s ${REPOSITORY_RAW_SOURCE_URL}/k8s-proxmox/k8s-node-setup.sh > ~/k8s-node-setup.sh"
+  - su - cloudinit -c "curl -s ${REPOSITORY_RAW_SOURCE_URL}/onp-k8s/cluster-boot-up/scripts/nodes/k8s-node-setup.sh > ~/k8s-node-setup.sh"
   - su - cloudinit -c "sudo bash ./k8s-node-setup.sh ${vmname} ${TARGET_BRANCH}"
   # change default shell to bash
   - chsh -s $(which bash) cloudinit

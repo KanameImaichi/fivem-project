@@ -1,6 +1,6 @@
 #!/bin/bash
 
-encoded_token=$(echo "" | base64 -w 0)
+encoded_token=$(echo "" | base64)
 
 
 github_token_secret=$(cat <<EOF
@@ -8,7 +8,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: controller-manager
-  namespace: cluster-wide-apps
+  namespace: server-list
 type: Opaque
 data:
   github_token: "${encoded_token}"

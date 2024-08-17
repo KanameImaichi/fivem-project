@@ -362,7 +362,7 @@ helm install argocd argo/argo-cd \
     --namespace argocd
 helm install argocd argo/argocd-apps \
     --version 0.0.1 \
-    --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/k8s-manifests/argocd-apps-helm-chart-values.yaml
+    --values https://raw.githubusercontent.com/KanameImaichi/fivem-project/main/onp-k8s/manifests/argocd-apps-helm-chart-values.yaml
 
 
 cat <<EOF | kubectl apply -f -
@@ -432,11 +432,11 @@ sudo apt-get install -y ansible git sshpass
 git clone -b "${TARGET_BRANCH}" https://github.com/KanameImaichi/fivem-project.git "$HOME"/fivem-project
 
 # export ansible.cfg target
-export ANSIBLE_CONFIG="$HOME"/fivem-project/ansible/ansible.cfg
+export ANSIBLE_CONFIG="$HOME"/onp-k8s/cluster-boot-up/ansible/ansible.cfg
 
 # run ansible-playbook
-ansible-galaxy role install -r "$HOME"/fivem-project/ansible/roles/requirements.yaml
-ansible-galaxy collection install -r "$HOME"/fivem-project/ansible/roles/requirements.yaml
-ansible-playbook -i "$HOME"/fivem-project/ansible/hosts/k8s-servers/inventory "$HOME"/fivem-project/ansible/site.yaml
+ansible-galaxy role install -r "$HOME"/onp-k8s/cluster-boot-up/ansible/roles/requirements.yaml
+ansible-galaxy collection install -r "$HOME"/onp-k8s/cluster-boot-up/ansible/roles/requirements.yaml
+ansible-playbook -i "$HOME"/onp-k8s/cluster-boot-up/ansible/hosts/k8s-servers/inventory "$HOME"/fonp-k8s/cluster-boot-up/ansible/site.yaml
 
 # endregion
